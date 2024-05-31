@@ -1,16 +1,27 @@
-require("dotenv").config();
-const express = require("express");
-const connectDB = require("./config/connectDB");
+import dotenv from "dotenv";
+import express from "express";
+
+import { connectDB } from "./config/connectDB.js";
+import mainRoutes from "./routes/main.js";
+
+// Load the environment variables
+dotenv.config();
 
 const app = express();
+const PORT = 3005 || process.env.PORT;
 
-// Checking if connected to the database
+// Connecting to the database
 connectDB();
+
+// EJS Middleware
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello from the backend!");
 });
 
-app.listen(3005, () => {
-  console.log("Server is running on port 3005");
+app.use("/business", mainRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
