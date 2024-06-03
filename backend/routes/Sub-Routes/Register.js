@@ -46,18 +46,32 @@ export const Register = async (req, res) => {
   }
 };
 
+// Link to verify account
+export const Verify = async (req, res) => {
+  try {
+    const token = await Token.findOne({ token: req.params.token });
+    if (!token) {
+      return res.send("Invalid token");
+    }
+    const user = await User.findOne({ _id: token.userId });
+    if (!user) {
+      return res.send("User does not exist");
+    }
+    user.verified = true;
+    await user.save();
+    res.send("Account verified successfully");
+  } catch (error) {
+    res.send(error.message);
+  }
+};
+
+// Another code of link to verify account
 // export const Verify = async (req, res) => {
 //   try {
 //     const token = await Token.findOne({ token: req.params.token });
-//     if (!token) {
-//       return res.send("Invalid token");
-//     }
-//     const user = await User.findOne({ _id: token.userId });
-//     if (!user) {
-//       return res.send("User does not exist");
-//     }
-//     user.verified = true;
-//     await user.save();
+//     console.log(token);
+//     await User.updateOne({ _id: token.userId }, { $set: { verified: true } });
+//     await Token.findByIdAndDelete(token._id);
 //     res.send("Account verified successfully");
 //   } catch (error) {
 //     res.send(error.message);

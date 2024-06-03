@@ -7,6 +7,8 @@ export const Login = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       res.send("User does not exist");
+    } else if (!user.verified) {
+      res.send("User has not been verified");
     } else {
       const validPassword = await bcrypt.compare(password, user.password);
       if (validPassword) {
