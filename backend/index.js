@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 
 import { connectDB } from "./config/connectDB.js";
-import mainRoutes from "./routes/main.js";
+import accountRoutes from "./routes/account.js";
 
 // Load the environment variables
 dotenv.config();
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   res.send("Hello from the backend!");
 });
 
-app.use("/business", mainRoutes);
+app.use("/account", accountRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
