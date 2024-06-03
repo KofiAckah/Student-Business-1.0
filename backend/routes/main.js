@@ -11,5 +11,6 @@ router.get("/", (req, res) => {
 
 router.post("/register", Register);
 router.post("/login", Login);
+// router.get("/verify/:token", Verify);
 
 export default router;
