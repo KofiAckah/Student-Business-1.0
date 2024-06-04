@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const sendMail = async (email, link) => {
+const sendMailVerify = async (email, link) => {
   try {
     let transporter = nodemailer.createTransport({
       service: "gmail",
@@ -13,7 +13,7 @@ const sendMail = async (email, link) => {
       },
     });
 
-    let info = await transporter.sendMail({
+    let info = await transporter.sendMailVerify({
       from: process.env.GMAIL_USER,
       to: email,
       subject: "Account Verification Link",
@@ -30,4 +30,4 @@ const sendMail = async (email, link) => {
   }
 };
 // Compare this snippet from backend/routes/Sub-Routes/ForgotPassword.js:
-export default sendMail;
+export default sendMailVerify;

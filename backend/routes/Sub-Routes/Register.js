@@ -2,7 +2,7 @@ import { User } from "../../models/User.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import Token from "../../middleware/tokenizer.js";
-import sendMail from "../../config/MailService.js";
+import sendMailVerify from "../../config/MailVerify.js";
 
 export const Register = async (req, res) => {
   try {
@@ -38,7 +38,7 @@ export const Register = async (req, res) => {
       console.log("Token saved successfully");
       // http://localhost:5000/verify/${token}
       const link = `http://localhost:5000/verify/${token}`;
-      await sendMail(email, link);
+      await sendMailVerify(email, link);
       console.log("Email sent successfully");
     }
   } catch (error) {
