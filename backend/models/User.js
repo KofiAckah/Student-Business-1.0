@@ -22,6 +22,9 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  reset_OTP: {
+    type: Number,
+  },
 });
 
 export const User = mongoose.model("User", userSchema);
