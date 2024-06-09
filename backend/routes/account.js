@@ -1,12 +1,13 @@
 import express from "express";
 
 import { Register, Verify } from "./Sub-Routes/Register.js";
-import { Login } from "./Sub-Routes/Login.js";
+import { Login, dashboard } from "./Sub-Routes/Login.js";
 import {
   sendingOTP,
   verifyOTP,
   resetPassword,
 } from "./Sub-Routes/ResetPassword.js";
+import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.get("/verify/:token", Verify);
 router.post("/send-otp-password", sendingOTP);
 router.post("/verify-otp", verifyOTP);
 router.post("/reset-password", resetPassword);
+router.get("/dashboard", authMiddleware, dashboard);
 
 export default router;
