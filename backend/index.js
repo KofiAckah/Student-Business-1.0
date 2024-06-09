@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import { connectDB } from "./config/connectDB.js";
 import accountRoutes from "./routes/account.js";
@@ -17,6 +18,7 @@ connectDB();
 // EJS Middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello from the backend!");
