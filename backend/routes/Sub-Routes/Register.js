@@ -1,9 +1,9 @@
+// Routes for Register and Verify are defined in this file
 import { User } from "../../models/User.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
 import Token from "../../middleware/tokenizer.js";
 import sendMailVerify from "../../config/MailVerify.js";
-import jwt from "jsonwebtoken";
 
 export const Register = async (req, res, next) => {
   try {

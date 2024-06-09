@@ -1,3 +1,7 @@
+// Routes for Reset Password are defined in this file contains the following functions:
+// - sendingOTP
+// - verifyOTP
+// - resetPassword
 import bcrypt from "bcrypt";
 import { User } from "../../models/User.js";
 import sendOTP from "../../config/MailReset.js";

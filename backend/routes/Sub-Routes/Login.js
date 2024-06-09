@@ -46,3 +46,14 @@ export const dashboard = async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+
+export const Logout = async (req, res) => {
+  try {
+    res.clearCookie("token");
+    // res.send("User logged out successfully");
+    res.status(200).json({ msg: "User logged out successfully" });
+  } catch (error) {
+    // res.send(error.message);
+    res.status(500).json({ msg: error.message });
+  }
+};

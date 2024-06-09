@@ -1,7 +1,7 @@
 import express from "express";
 
 import { Register, Verify } from "./Sub-Routes/Register.js";
-import { Login, dashboard } from "./Sub-Routes/Login.js";
+import { Login, dashboard, Logout } from "./Sub-Routes/Login.js";
 import {
   sendingOTP,
   verifyOTP,
@@ -22,5 +22,6 @@ router.post("/send-otp-password", sendingOTP);
 router.post("/verify-otp", verifyOTP);
 router.post("/reset-password", resetPassword);
 router.get("/dashboard", authMiddleware, dashboard);
+router.get("/logout", Logout);
 
 export default router;
