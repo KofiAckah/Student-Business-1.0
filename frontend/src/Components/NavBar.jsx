@@ -38,7 +38,7 @@ function Nav() {
           </li>
           <li>
             <Link smooth to="#project">
-              Projects
+              Messages
             </Link>
           </li>
           <li>
@@ -78,7 +78,7 @@ function Nav() {
         </li>
         <li>
           <Link smooth to="#project">
-            Projects
+            Messages
           </Link>
         </li>
         <li>

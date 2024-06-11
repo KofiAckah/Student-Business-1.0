@@ -7,6 +7,7 @@ import {
   verifyOTP,
   resetPassword,
 } from "./Sub-Routes/ResetPassword.js";
+import { PostProduct, GetProduct } from "./Sub-Routes/ProductRoutes.js";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -23,5 +24,7 @@ router.post("/verify-otp", verifyOTP);
 router.post("/reset-password", resetPassword);
 router.get("/dashboard", authMiddleware, dashboard);
 router.get("/logout", Logout);
+router.post("/post-product", authMiddleware, PostProduct);
+router.get("/get-product", authMiddleware, GetProduct);
 
 export default router;
