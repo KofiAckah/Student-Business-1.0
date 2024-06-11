@@ -42,7 +42,6 @@ export default function VerifyOTP() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
               placeholder="Email"
             />
           </div>
@@ -52,7 +51,6 @@ export default function VerifyOTP() {
               type="number"
               value={OTP}
               onChange={(e) => setOTP(e.target.value)}
-              required
               placeholder="OTP"
             />
           </div>

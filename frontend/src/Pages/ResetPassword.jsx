@@ -49,7 +49,6 @@ export default function ResetPassword() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
               placeholder="Email"
             />
           </div>
@@ -59,7 +58,6 @@ export default function ResetPassword() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
               placeholder="Password"
             />
           </div>
@@ -70,7 +68,6 @@ export default function ResetPassword() {
               type={showPassword ? "text" : "password"}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              required
               placeholder="Confirm Password"
             />
             <FontAwesomeIcon

@@ -6,6 +6,10 @@ import dotenv from "dotenv";
 export const Login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    if (!email || !password) {
+      // return res.send("Please fill in all fields");
+      return res.status(400).json({ msg: "Please fill in all fields" });
+    }
     const user = await User.findOne({ email });
     if (!user) {
       // res.send("User does not exist");
