@@ -29,7 +29,9 @@ export const Register = async (req, res, next) => {
       });
       await newUser.save();
       // res.send("User registered successfully");
-      res.status(200).json({ msg: "User registered successfully" });
+      res.status(200).json({
+        msg: "User registered successfully",
+      });
 
       // generate token
       const token = crypto.randomBytes(32).toString("hex");
@@ -39,7 +41,7 @@ export const Register = async (req, res, next) => {
       });
       await newToken.save();
       console.log("Token saved successfully");
-      const link = `http://localhost:5000/verify/${token}`;
+      const link = `http://localhost:3005/account/verify/${token}`;
       await sendMailVerify(email, link);
       console.log("Email sent successfully");
       //
