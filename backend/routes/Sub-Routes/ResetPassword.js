@@ -10,20 +10,21 @@ export const sendingOTP = async (req, res) => {
   try {
     const { email } = req.body;
     if (!email) {
-      return res.send("Please fill in all fields");
+      return res.status(400).json({ msg: "Please fill in all fields" });
     }
     const user = await User.findOne({ email });
     if (!user) {
-      res.send("User does not exist");
+      return res.status(400).json({ msg: "User does not exist" });
     } else {
       const OTP = Math.floor(100000 + Math.random() * 900000);
       user.reset_OTP = OTP;
       await user.save();
       await sendOTP(email, OTP);
-      res.status(200).send({ message: "OTP sent successfully", otp: OTP });
+      // res.status(200).send({ message: "OTP sent successfully", otp: OTP });
+      return res.status(200).json({ msg: "OTP sent check your email" });
     }
   } catch (error) {
-    res.send(error.message);
+    res.status(500).json({ msg: error.message });
   }
 };
 
@@ -31,20 +32,20 @@ export const verifyOTP = async (req, res) => {
   try {
     const { email, OTP } = req.body;
     if (!email || !OTP) {
-      return res.send("Please fill in all fields");
+      return res.status(400).json({ msg: "Please fill in all fields" });
     }
     const user = await User.findOne({ email });
     if (!user) {
-      res.send("User does not exist");
+      return res.status(400).json({ msg: "User does not exist" });
     } else {
       if (user.reset_OTP === OTP) {
-        res.status(200).send("OTP verified successfully");
+        return res.status(200).json({ msg: "OTP verified successfully" });
       } else {
-        res.send("Invalid OTP");
+        return res.status(400).json({ msg: "Invalid OTP" });
       }
     }
   } catch (error) {
-    res.send(error.message);
+    res.status(500).json({ msg: error.message });
   }
 };
 
@@ -56,21 +57,21 @@ export const resetPassword = async (req, res) => {
     // }
     const { email, password, confirmPassword } = req.body;
     if (!email || !password || !confirmPassword) {
-      return res.send("Please fill in all fields");
+      return res.status(400).json({ msg: "Please fill in all fields" });
     }
     if (password !== confirmPassword) {
-      return res.send("Passwords do not match");
+      return res.status(400).json({ msg: "Passwords do not match" });
     }
     const user = await User.findOne({ email });
     if (!user) {
-      res.send("User does not exist");
+      return res.status(400).json({ msg: "User does not exist" });
     } else {
       const hashedPassword = await bcrypt.hash(password, 10);
       user.password = hashedPassword;
       await user.save();
-      res.send("Password reset successfully");
+      res.status(200).json({ msg: "Password reset successfully" });
     }
   } catch (error) {
-    res.send(error.message);
+    res.status(500).json({ msg: error.message });
   }
 };

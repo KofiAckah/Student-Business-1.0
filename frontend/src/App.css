@@ -1,3 +1,16 @@
 .loginInput {
   @apply border border-primary-300 p-1 rounded-lg px-2 outline-2 outline-primary-500 w-full;
 }
+.btnSubmit {
+  @apply bg-primary-500 text-white w-8/12 md:w-1/2 xl:w-1/3 py-1 rounded-lg hover:bg-primary-400 transition duration-300 ease-in-out active:bg-primary-500;
+}
+
+/* Code to remove the arrow from number input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
