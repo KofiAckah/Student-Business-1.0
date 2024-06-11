@@ -5,6 +5,8 @@ import cors from "cors";
 
 import { connectDB } from "./config/connectDB.js";
 import accountRoutes from "./routes/account.js";
+import MongoStore from "connect-mongo";
+import session from "express-session";
 
 // Load the environment variables
 dotenv.config();
@@ -19,6 +21,19 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello from the backend!");
