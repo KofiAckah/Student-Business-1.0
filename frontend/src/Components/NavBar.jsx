@@ -27,29 +27,19 @@ function Nav() {
         </Link>
         <ul className="sm:flex hidden gap-5">
           <li>
-            <Link smooth to="#home">
-              Home
-            </Link>
+            <Link>Home</Link>
           </li>
           <li>
-            <Link smooth to="#about">
-              About
-            </Link>
+            <Link>Notifications</Link>
           </li>
           <li>
-            <Link smooth to="#project">
-              Messages
-            </Link>
+            <Link to="/sell">Sell</Link>
           </li>
           <li>
-            <Link smooth to="#skill">
-              Skills
-            </Link>
+            <Link>Messages</Link>
           </li>
           <li>
-            <Link smooth to="#contact">
-              Contact
-            </Link>
+            <Link>Profile</Link>
           </li>
         </ul>
 
@@ -67,29 +57,19 @@ function Nav() {
         } flex flex-col sm:hidden bg-secondary-200 justify-center items-center gap-5 p-5`}
       >
         <li>
-          <Link smooth to="#home">
-            Home
-          </Link>
+          <Link>Home</Link>
         </li>
         <li>
-          <Link smooth to="#about">
-            About
-          </Link>
+          <Link>Notifications</Link>
         </li>
         <li>
-          <Link smooth to="#project">
-            Messages
-          </Link>
+          <Link to="/sell">Sell</Link>
         </li>
         <li>
-          <Link smooth to="#skill">
-            Skills
-          </Link>
+          <Link>Messages</Link>
         </li>
         <li>
-          <Link smooth to="#contact">
-            Contact
-          </Link>
+          <Link>Profile</Link>
         </li>
       </ul>
     </div>

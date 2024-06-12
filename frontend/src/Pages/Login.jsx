@@ -14,10 +14,14 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3005/account/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "http://localhost:3005/account/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
       // if (res.data.status) {
       enqueueSnackbar(res.data.msg, { variant: "success" });
       navigate("/");
