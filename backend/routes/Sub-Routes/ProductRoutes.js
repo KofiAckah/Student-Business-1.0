@@ -19,10 +19,10 @@ export const PostProduct = async (req, res) => {
 
 export const GetProduct = async (req, res) => {
   try {
-    const products = await Product.find().populate("user", "username");
+    const products = await Product.find().populate("user", "email");
     const formattedProducts = products.map((product) => ({
       name: product.name,
-      postedBy: product.user ? product.user.username : "Unknown",
+      postedBy: product.user.email,
     }));
     res.status(200).json(formattedProducts);
   } catch (error) {

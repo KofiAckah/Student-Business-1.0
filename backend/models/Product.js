@@ -13,6 +13,38 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  // image: {
+  //   type: String,
+  //   required: true,
+  // },
+  // category: {
+  //   type: String,
+  //   required: true,
+  //   enum: [
+  //     "Clothes",
+  //     "Electronics",
+  //     "Food",
+  //     "Home Appliances",
+  //     "Services",
+  //     "Software",
+  //     "Others",
+  //   ],
+  // },
+  // color: {
+  //   type: String,
+  //   enum: [
+  //     "Black",
+  //     "White",
+  //     "Red",
+  //     "Blue",
+  //     "Green",
+  //     "Yellow",
+  //     "Gray",
+  //     "Brown",
+  //     "Violet",
+  //     "Others",
+  //   ],
+  // },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
