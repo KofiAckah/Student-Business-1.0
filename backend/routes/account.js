@@ -1,5 +1,13 @@
 import express from "express";
 
+import path from "path";
+import multer from "multer";
+
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 import { Register, Verify } from "./Sub-Routes/Register.js";
 import { Login, dashboard, Logout } from "./Sub-Routes/Login.js";
 import {
@@ -12,10 +20,12 @@ import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
 
-import multer from "multer";
 const storage = multer.diskStorage({
+  // destination: function (req, file, cb) {
+  //   cb(null, "../frontend/src/assets/Images/");
+  // },
   destination: function (req, file, cb) {
-    cb(null, "uploads/");
+    cb(null, path.join(__dirname, "../uploads"));
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now();

@@ -3,6 +3,12 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 import { connectDB } from "./config/connectDB.js";
 import accountRoutes from "./routes/account.js";
 import MongoStore from "connect-mongo";
@@ -40,6 +46,8 @@ app.use(
     },
   })
 );
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/", (req, res) => {
   res.send("Hello from the backend!");
