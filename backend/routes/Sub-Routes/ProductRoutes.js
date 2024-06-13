@@ -13,14 +13,7 @@ export const PostProduct = async (req, res) => {
       condition,
       negotiable,
     } = req.body;
-    if (
-      !title ||
-      !location ||
-      !description ||
-      !price ||
-      !imageName ||
-      !category
-    ) {
+    if (!title || !location || !price || !imageName || !category) {
       return res.status(400).json({ msg: "Please fill in all fields" });
     }
     const product = new Product({
@@ -45,13 +38,13 @@ export const PostProduct = async (req, res) => {
 
 export const GetProduct = async (req, res) => {
   try {
-    const products = await Product.find().populate("user", "email");
+    const products = await Product.find().populate("user", "username");
     const formattedProducts = products.map((product) => ({
       title: product.title,
       description: product.description,
       price: product.price,
       image: product.image,
-      postedBy: product.user.email,
+      postedBy: product.user.username,
     }));
     res.status(200).json(formattedProducts);
   } catch (error) {

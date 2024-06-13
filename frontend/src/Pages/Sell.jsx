@@ -103,7 +103,12 @@ export default function Sell() {
         break;
       case "Software":
         setCategoryInfo(
-          "Software: Digital products and services. Include apps, games, and subscriptions."
+          "Software: Digital products and services. Include apps, games, anti-virus,and subscriptions."
+        );
+        break;
+      case "Student Needs":
+        setCategoryInfo(
+          "Student Needs: Items for students. Include books, stationery, and gadgets."
         );
         break;
       case "Others":
@@ -151,7 +156,7 @@ export default function Sell() {
         <div className="my-2 sm:my-3 w-10/12 md:w-2/3 xl:w-1/2">
           <label htmlFor="description">Description</label>
           <textarea
-            className="loginInput"
+            className="loginInput h-20 sm:h-32"
             type="text"
             id="description"
             value={description}
@@ -159,6 +164,10 @@ export default function Sell() {
             placeholder="Description your product or service"
             style={{ resize: "none" }}
           />
+          <p className="text-sm italic text-gray-600">
+            <FontAwesomeIcon icon={faCircleInfo} beat />
+            Descripted the product for buyers to get more info about.
+          </p>
         </div>
         <div className="my-2 sm:my-3 w-10/12 md:w-2/3 xl:w-1/2">
           <label htmlFor="price">Price</label>
@@ -170,6 +179,10 @@ export default function Sell() {
             onChange={(e) => setPrice(e.target.value)}
             placeholder="Price for product or service"
           />
+          <p className="text-sm italic text-gray-600">
+            <FontAwesomeIcon icon={faCircleInfo} beat />
+            Currency is in Cedis (GHS).
+          </p>
         </div>
         <div className="my-2 sm:my-3 w-10/12 md:w-2/3 xl:w-1/2 flex items-center justify-between overflow-hidden">
           <label htmlFor="image" className="custom-file-upload">
@@ -187,7 +200,7 @@ export default function Sell() {
             <img
               src={imagePreview}
               alt="Preview"
-              className="w-32 h-32 sm:w-40 sm:h-40 object-cover bg-gray-200 rounded-lg ml-2"
+              className="w-32 h-32 sm:w-40 sm:h-40 object-cover bg-gray-400 rounded-lg ml-2"
             />
           )}
         </div>
@@ -205,6 +218,7 @@ export default function Sell() {
             <option value="Home Appliances">Home Appliances</option>
             <option value="Services">Services</option>
             <option value="Software">Software</option>
+            <option value="Student Needs">Student Needs</option>
             <option value="Others">Others</option>
           </select>
           {categoryInfo && (

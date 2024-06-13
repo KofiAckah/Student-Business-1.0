@@ -1,9 +1,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 // import { useNavigate } from "react-router-dom";
-import { Logo, CompanyName } from "../Components/Default";
+// import { Logo, CompanyName } from "../Components/Default";
 import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLocationDot,
+  faCirclePlus,
+  faUtensils,
+  faBook,
+  faShirt,
+} from "@fortawesome/free-solid-svg-icons";
 
 import NavBar from "../Components/NavBar";
 
@@ -28,50 +36,66 @@ export default function Home() {
     };
     fetchProducts();
   }, [enqueueSnackbar]);
+
+  const categories = [
+    { name: "Sell A Product", icon: faCirclePlus, link: "/sell" },
+    { name: "Food", icon: faUtensils, link: "/food" },
+    { name: "Student Needs", icon: faBook, link: "/student-needs" },
+    { name: "Clothes", icon: faShirt, link: "/clothes" },
+  ];
+
   return (
-    <div>
+    <div className="bg-secondary-100">
       <NavBar />
-      <div className="flex flex-col max-sm:justify-center max-sm:items-center w-screen h-screen">
-        <div className="flex items-center justify-center mb-5 sm:my-10">
-          <h1 className="text-lg md:text-xl mr-2">{CompanyName}</h1>
-          <img src={Logo} alt="Logo" className="w-10 md:w-16" />
-        </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-center">
-          {" "}
-          Welcome to {CompanyName}{" "}
-        </h2>
-        <div className="flex flex-col justify-center items-center ">
-          <h2 className="text-xl md:text-2xl font-bold text-center my-5">
-            {" "}
-            Products{" "}
-          </h2>
-          <div className="flex flex-wrap justify-center items-center w-screen">
-            {products.map((product, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center w-8/12 md:w-1/2 xl:w-1/3 my-5"
-              >
-                <img
-                  src={`http://localhost:3005/uploads/${product.image}`}
-                  alt="Product"
-                  className="w-11/12 h-52 md:h-72 object-cover"
-                />
-                <h3 className="text-lg font-bold my-2">{product.title}</h3>
-                <p className="text-sm text-center">{product.description}</p>
-                <p className="text-lg font-bold my-2">
-                  Price: ${product.price}
-                </p>
-                <p className="text-sm">Posted by: {product.postedBy}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <Link to="/sell" className="mt-5">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Sell Product
-          </button>
-        </Link>
+      <div className="flex justify-center items-center w-full gradient h-56">
+        <p className="text-white font-medium">
+          Find anything in{" "}
+          <span className="bg-black text-white px-2 py-1 rounded-md">
+            <FontAwesomeIcon icon={faLocationDot} /> All KNUST
+          </span>
+        </p>
       </div>
+      <div className="bg-white py-4">
+        <h2 className="text-center text-lg md:text-xl font-semibold">
+          Top Categories
+        </h2>
+        <div className="flex flex-wrap gap-2 my-4 lg:w-2/3 lg:mx-auto">
+          {categories.map((category, index) => (
+            <Link
+              to={category.link}
+              key={index}
+              className="border border-primary-400 rounded-lg p-5 text-primary-400 hover:bg-primary-400 hover:text-white transition duration-300 ease-in-out w-40 mx-auto"
+            >
+              <div className="flex flex-col items-center justify-center">
+                <FontAwesomeIcon icon={category.icon} size="3x" />
+                <p>{category.name}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <h2 className="text-center text-lg md:text-xl font-semibold">
+        Latest Products
+      </h2>
+      <div className="flex flex-wrap gap-2 my-4 lg:w-2/3 mx-5 lg:mx-auto">
+        {products.map((product, index) => (
+          <Link
+            key={index}
+            className="border border-primary-400 rounded-lg text-primary-400 bg-white mx-auto w-40 h-56 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg"
+          >
+            <img
+              src={`http://localhost:3005/uploads/${product.image}`}
+              alt="Product"
+              className="w-40 h-40 sm:w-48 sm:h-48 object-cover"
+            />
+            <div className="p-2">
+              <h3 className="line-clamp-1 font-medium">{product.title}</h3>
+              <p className="text-red-400">GH&#8373; {product.price}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className="gradient h-10 w-full"></div>
     </div>
   );
 }

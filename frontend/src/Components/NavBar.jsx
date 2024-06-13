@@ -12,7 +12,7 @@ function Nav() {
   }
 
   return (
-    <div className="sticky bg-red-400 -top-2 shadow-2xl block z-10">
+    <div className="sticky bg-red-400 top-0 shadow-2xl block z-10">
       {/* Nav Bar for Desktop */}
       <nav className="flex py-2 px-5 justify-between items-center">
         <Link to="/">
@@ -27,7 +27,7 @@ function Nav() {
         </Link>
         <ul className="sm:flex hidden gap-5">
           <li>
-            <Link>Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <Link>Notifications</Link>
@@ -54,10 +54,10 @@ function Nav() {
       <ul
         className={` ${
           open ? "hidden" : "block"
-        } flex flex-col sm:hidden bg-secondary-200 justify-center items-center gap-5 p-5`}
+        } flex flex-col sm:hidden bg-primary-500 justify-center items-center gap-5 p-5`}
       >
         <li>
-          <Link>Home</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
           <Link>Notifications</Link>

@@ -11,7 +11,6 @@ const ProductSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   price: {
     type: Number,
@@ -31,6 +30,7 @@ const ProductSchema = new mongoose.Schema({
       "Home Appliances",
       "Services",
       "Software",
+      "Student Needs",
       "Others",
     ],
   },
