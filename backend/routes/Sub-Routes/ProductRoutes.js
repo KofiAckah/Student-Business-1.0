@@ -5,25 +5,34 @@ export const PostProduct = async (req, res) => {
     const imageName = req.file ? req.file.filename : undefined;
     const {
       title,
+      location,
       description,
       price,
       category,
       categoryOthers,
-      color,
-      colorOthers,
+      condition,
+      negotiable,
     } = req.body;
-    if (!title || !description || !price || !imageName || !category) {
+    if (
+      !title ||
+      !location ||
+      !description ||
+      !price ||
+      !imageName ||
+      !category
+    ) {
       return res.status(400).json({ msg: "Please fill in all fields" });
     }
     const product = new Product({
       title,
+      location,
       description,
       price,
       image: imageName,
       category,
       categoryOthers,
-      color,
-      colorOthers,
+      condition,
+      negotiable,
       user: req.user._id,
     });
     await product.save();

@@ -5,6 +5,10 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  location: {
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,
@@ -34,24 +38,14 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  color: {
+  condition: {
     type: String,
-    enum: [
-      "Black",
-      "White",
-      "Red",
-      "Blue",
-      "Green",
-      "Yellow",
-      "Gray",
-      "Brown",
-      "Violet",
-      "Others",
-    ],
+    enum: ["New", "Used", ""],
   },
-  colorOthers: {
-    type: String,
-    default: "",
+  negotiable: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

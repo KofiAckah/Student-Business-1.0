@@ -53,6 +53,6 @@ router.post(
   authMiddleware,
   PostProduct
 );
-router.get("/get-product", authMiddleware, GetProduct);
+router.get("/get-product", GetProduct);
 
 export default router;
