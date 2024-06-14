@@ -38,7 +38,7 @@ export const verifyOTP = async (req, res) => {
     if (!user) {
       return res.status(400).json({ msg: "User does not exist" });
     } else {
-      if (user.reset_OTP === OTP) {
+      if (user.reset_OTP == OTP) {
         return res.status(200).json({ msg: "OTP verified successfully" });
       } else {
         return res.status(400).json({ msg: "Invalid OTP" });

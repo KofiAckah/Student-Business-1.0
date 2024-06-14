@@ -38,7 +38,11 @@ export default function Home() {
   }, [enqueueSnackbar]);
 
   const categories = [
-    { name: "Sell A Product", icon: faCirclePlus, link: "/sell" },
+    {
+      name: "Sell A Product",
+      icon: faCirclePlus,
+      link: "/sell",
+    },
     { name: "Food", icon: faUtensils, link: "/food" },
     { name: "Student Needs", icon: faBook, link: "/student-needs" },
     { name: "Clothes", icon: faShirt, link: "/clothes" },
@@ -81,6 +85,7 @@ export default function Home() {
         {products.map((product, index) => (
           <Link
             key={index}
+            to={product.id}
             className="border border-primary-400 rounded-lg text-primary-400 bg-white mx-auto w-40 h-56 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg"
           >
             <img

@@ -15,7 +15,11 @@ import {
   verifyOTP,
   resetPassword,
 } from "./Sub-Routes/ResetPassword.js";
-import { PostProduct, GetProduct } from "./Sub-Routes/ProductRoutes.js";
+import {
+  PostProduct,
+  GetProduct,
+  GetProductId,
+} from "./Sub-Routes/ProductRoutes.js";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -54,5 +58,6 @@ router.post(
   PostProduct
 );
 router.get("/get-product", GetProduct);
+router.get("/get-product/:id", authMiddleware, GetProductId);
 
 export default router;

@@ -8,11 +8,9 @@ import ResetPassword from "./Pages/ResetPassword";
 import Sell from "./Pages/Sell";
 import "./App.css";
 
-// import Cookies from "js-cookie";
-
 export default function App() {
   return (
-    <Routes className="">
+    <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/sell" element={<Sell />} />
       {/* Accounts Routes */}

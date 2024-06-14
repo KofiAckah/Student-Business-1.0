@@ -22,10 +22,9 @@ export default function Login() {
         },
         { withCredentials: true }
       );
-      // if (res.data.status) {
+
       enqueueSnackbar(res.data.msg, { variant: "success" });
       navigate("/");
-      // }
     } catch (error) {
       console.log("ERROR: ", error.response.data.msg);
       enqueueSnackbar(error.response.data.msg, { variant: "error" });

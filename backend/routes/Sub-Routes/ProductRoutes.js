@@ -40,6 +40,7 @@ export const GetProduct = async (req, res) => {
   try {
     const products = await Product.find().populate("user", "username");
     const formattedProducts = products.map((product) => ({
+      id: product._id,
       title: product.title,
       description: product.description,
       price: product.price,
@@ -47,6 +48,21 @@ export const GetProduct = async (req, res) => {
       postedBy: product.user.username,
     }));
     res.status(200).json(formattedProducts);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+};
+
+export const GetProductId = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id).populate(
+      "user",
+      "username email"
+    );
+    res.status(200).json(product);
   } catch (error) {
     res
       .status(500)
