@@ -85,7 +85,7 @@ export default function Home() {
         {products.map((product, index) => (
           <Link
             key={index}
-            to={product.id}
+            to={`/product/${product.id}`}
             className="border border-primary-400 rounded-lg text-primary-400 bg-white mx-auto w-40 h-56 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg"
           >
             <img

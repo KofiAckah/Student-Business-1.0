@@ -58,11 +58,18 @@ export const GetProduct = async (req, res) => {
 export const GetProductId = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findById(id).populate(
-      "user",
-      "username email"
-    );
-    res.status(200).json(product);
+    const product = await Product.findById(id).populate("user", "username");
+    const formattedProduct = {
+      id: product._id,
+      title: product.title,
+      location: product.location,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+      postedBy: product.user.username,
+    };
+    res.status(200).json(formattedProduct);
+    // res.status(200).json(product);
   } catch (error) {
     res
       .status(500)

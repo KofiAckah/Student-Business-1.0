@@ -17,6 +17,7 @@ export const authMiddleware = async (req, res, next) => {
     }
     next();
   } catch (err) {
-    res.status(401).json({ msg: "Token is not valid" });
+    // res.status(401).json({ msg: "Token is not valid" });
+    res.status(401).json({ msg: "Login before getting access" });
   }
 };
