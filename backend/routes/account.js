@@ -8,6 +8,7 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Routes
 import { Register, Verify } from "./Sub-Routes/Register.js";
 import { Login, dashboard, Logout } from "./Sub-Routes/Login.js";
 import {
@@ -20,6 +21,7 @@ import {
   GetProduct,
   GetProductId,
 } from "./Sub-Routes/ProductRoutes.js";
+import { GetUser } from "./Sub-Routes/Profile.js";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -43,6 +45,7 @@ router.get("/", (req, res) => {
   res.send("Hello from the backend!, main.js Home");
 });
 
+// account
 router.post("/register", Register);
 router.post("/login", Login);
 router.get("/verify/:token", Verify);

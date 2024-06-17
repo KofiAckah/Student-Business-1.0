@@ -11,6 +11,7 @@ const __dirname = dirname(__filename);
 
 import { connectDB } from "./config/connectDB.js";
 import accountRoutes from "./routes/account.js";
+import userInfo from "./routes/info.js";
 import MongoStore from "connect-mongo";
 import session from "express-session";
 
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/account", accountRoutes);
+app.use("/user", userInfo);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
