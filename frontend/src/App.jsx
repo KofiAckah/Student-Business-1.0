@@ -9,6 +9,9 @@ import ResetPassword from "./Pages/ResetPassword";
 // Products Routes
 import Sell from "./Pages/Sell";
 import ShowProduct from "./Pages/ShowProduct";
+// User Profile
+import ViewSeller from "./Pages/ViewSeller";
+
 import "./App.css";
 
 export default function App() {
@@ -17,6 +20,7 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="/sell" element={<Sell />} />
       <Route path="/product/:id" element={<ShowProduct />} />
+      <Route path="/seller/:id" element={<ViewSeller />} />
       {/* Accounts Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />

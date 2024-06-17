@@ -68,7 +68,7 @@ export default function ShowProduct() {
               Contact Seller
             </button>
           </Link>
-          <Link>
+          <Link to={`/seller/${product.id}`}>
             <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
               <FontAwesomeIcon icon={faUser} className="mr-3" /> View Seller
               Profile

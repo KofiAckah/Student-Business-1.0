@@ -14,6 +14,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+  },
+  seller: {
+    type: Boolean,
+    default: false,
+  },
+  VerifiedSeller: {
+    type: Boolean,
+    default: false,
+  },
+  phone: {
+    type: Number,
+  },
+  dob: {
+    type: Date,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
