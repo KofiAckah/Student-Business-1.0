@@ -6,13 +6,14 @@ export const GetUser = async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id).populate(
       "user",
-      "username email createdAt image phone"
+      "username email createdAt image phone bio"
     );
     const formattedProduct = {
       username: product.user.username,
       email: product.user.email,
       image: product.user.image,
       phone: product.user.phone,
+      bio: product.user.bio,
       yearJoin: product.user.createdAt,
     };
     res.status(200).json(formattedProduct);

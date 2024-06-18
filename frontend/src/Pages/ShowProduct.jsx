@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
-  faEnvelope,
+  faMessage,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -64,7 +64,7 @@ export default function ShowProduct() {
           </div>
           <Link>
             <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
-              <FontAwesomeIcon icon={faEnvelope} className="mr-3" />
+              <FontAwesomeIcon icon={faMessage} className="mr-3" />
               Contact Seller
             </button>
           </Link>

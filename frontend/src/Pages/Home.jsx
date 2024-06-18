@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 // import { useNavigate } from "react-router-dom";
-// import { Logo, CompanyName } from "../Components/Default";
+import { Logo, CompanyName } from "../Components/Default";
 import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -51,13 +51,17 @@ export default function Home() {
   return (
     <div className="bg-secondary-100">
       <NavBar />
-      <div className="flex justify-center items-center w-full gradient h-56">
+      <div className="flex flex-col justify-center items-center w-full gradient h-56">
         <p className="text-white font-medium">
           Find anything in{" "}
           <span className="bg-black text-white px-2 py-1 rounded-md">
             <FontAwesomeIcon icon={faLocationDot} /> All KNUST
           </span>
         </p>
+        <div className="flex items-center mt-2">
+          <p className="md:text-3xl text-2xl">{CompanyName}</p>
+          <img src={Logo} alt="logo" className="md:w-7 md:h-7 w-5 h-5 ml-3" />
+        </div>
       </div>
       <div className="bg-white py-4">
         <h2 className="text-center text-lg md:text-xl font-semibold">
