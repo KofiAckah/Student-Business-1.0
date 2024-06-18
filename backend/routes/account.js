@@ -21,7 +21,7 @@ import {
   GetProduct,
   GetProductId,
 } from "./Sub-Routes/ProductRoutes.js";
-import { GetUser } from "./Sub-Routes/Profile.js";
+import { GetSeller } from "./Sub-Routes/Profile.js";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();

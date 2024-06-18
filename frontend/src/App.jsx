@@ -11,6 +11,7 @@ import Sell from "./Pages/Sell";
 import ShowProduct from "./Pages/ShowProduct";
 // User Profile
 import ViewSeller from "./Pages/ViewSeller";
+import Profile from "./Pages/Profile";
 
 import "./App.css";
 
@@ -21,6 +22,7 @@ export default function App() {
       <Route path="/sell" element={<Sell />} />
       <Route path="/product/:id" element={<ShowProduct />} />
       <Route path="/seller/:id" element={<ViewSeller />} />
+      <Route path="/profile" element={<Profile />} />
       {/* Accounts Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />

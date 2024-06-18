@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import { CompanyName, Logo } from "../Components/Default";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,10 +10,22 @@ import {
   faBell,
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Nav() {
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.get("http://localhost:3005/account/logout");
+      navigate("/login");
+      console.log("Logged out");
+    } catch (error) {
+      console.log("Error logging out");
+      console.log(error);
+    }
+  };
 
   function handleMenu() {
     setOpen((prevOpen) => !prevOpen);
@@ -113,7 +126,7 @@ function Nav() {
           </Link>
         </li>
         <li className="hover:bg-red-400 w-full hover:text-white">
-          <Link to="/logout" className="p-2">
+          <Link onClick={handleLogout} className="p-2">
             Logout
           </Link>
         </li>
