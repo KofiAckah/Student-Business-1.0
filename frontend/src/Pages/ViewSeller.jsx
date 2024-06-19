@@ -67,7 +67,10 @@ export default function ViewSeller() {
           </p>
           <p>
             <FontAwesomeIcon icon={faCalendar} className="text-red-400 mr-2" />{" "}
-            Joined: <span className="font-normal">{seller.yearJoin}</span>
+            Joined:{" "}
+            <span className="font-normal">
+              {new Date(seller.yearJoin).toLocaleDateString()}
+            </span>
           </p>
         </div>
       </div>
