@@ -28,7 +28,7 @@ export default function Profile() {
     <div className="">
       <NavBar />
       <div className="w-full py-10">
-        <div className="grid grid-cols-3 mx-10 gap-10">
+        <div className="md:grid grid-cols-3 mx-10 gap-10">
           <div className="card w-full h-full p-3 px-5">
             <div className="flex flex-col items-center rounded-full overflow-hidden border-2 border-red-400 w-32 h-32 md:w-40 md:h-40 mx-auto bg-secondary-100">
               {user.image !== "" ? (
@@ -44,10 +44,15 @@ export default function Profile() {
                 />
               )}
             </div>
-            <p className="text-lg font-medium mt-2">{user.username}</p>
-            <p className="text-sm text-gray-500">{user.email}</p>
-            <p className="text-sm text-gray-500">{user.bio}</p>
-            <p className="text-sm text-gray-500">{user.phone}</p>
+            <p className="text-lg font-medium my-2 text-center">
+              {user.username}
+            </p>
+            <p className="text-sm text-gray-500 my-1">{user.email}</p>
+            <p className="text-sm text-gray-500 my-1">0{user.phone}</p>
+            <p className="text-sm text-primary-400 my-1">Bio</p>
+            <p className="text-sm text-gray-500 my-1">
+              {user.bio !== "" ? user.bio : ""}
+            </p>
           </div>
           <div className="col-span-2 h-96 bg-red-400"></div>
         </div>

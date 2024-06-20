@@ -20,15 +20,19 @@ const userSchema = new mongoose.Schema(
     },
     image: {
       type: String,
+      default: "",
     },
     phone: {
       type: Number,
+      default: "",
     },
     dob: {
       type: Date,
+      default: "",
     },
     bio: {
       type: String,
+      default: "",
     },
     verified: {
       type: Boolean,

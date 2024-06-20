@@ -47,7 +47,7 @@ export default function ShowProduct() {
           <div className="bg-secondary-100 p-2 rounded-lg max-md:mt-4">
             <p className="text-primary-400 font-bold">{product.title}</p>
             <p className="text-red-400 font-semibold">
-              GH&#8373; {product.price}
+              GH&#8373; {Number(product.price).toFixed(2)}
             </p>
             <p>
               <FontAwesomeIcon icon={faLocationDot} className="text-red-400" />{" "}

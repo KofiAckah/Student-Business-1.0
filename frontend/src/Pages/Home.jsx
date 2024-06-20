@@ -99,7 +99,9 @@ export default function Home() {
             />
             <div className="p-2">
               <h3 className="line-clamp-1 font-medium">{product.title}</h3>
-              <p className="text-red-400">GH&#8373; {product.price}</p>
+              <p className="text-red-400">
+                GH&#8373; {Number(product.price).toFixed(2)}
+              </p>
             </div>
           </Link>
         ))}
