@@ -52,3 +52,53 @@ export const UpdateProfile = async (req, res) => {
       .json({ msg: "Internal server error", error: error.message });
   }
 };
+
+export const SellerProducts = async (req, res) => {
+  try {
+    const products = await Product.find({ user: req.user._id });
+    res.status(200).json(products);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+};
+
+export const ViewProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+};
+
+export const EditProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    product.title = req.body.title;
+    product.price = req.body.price;
+    product.description = req.body.description;
+    product.category = req.body.category;
+    product.image = req.body.image;
+    await product.save();
+    res.status(200).json(product);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+};
+
+export const DeleteProduct = async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json({ msg: "Product deleted" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ msg: "Internal server error", error: error.message });
+  }
+};
