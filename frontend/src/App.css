@@ -48,10 +48,10 @@ input[type="number"] {
   height: 254px; */
   border-radius: 30px;
   background: #e0e0e0;
-  box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
   transition: all 0.3s ease 0s !important;
 }
 .card:hover {
+  box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
   transform: scale(1.04);
 }
 
