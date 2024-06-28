@@ -85,17 +85,17 @@ export default function Home() {
       <h2 className="text-center text-lg md:text-xl font-semibold">
         Latest Products
       </h2>
-      <div className="flex flex-wrap gap-2 my-4 lg:w-2/3 mx-5 lg:mx-auto">
+      <div className="flex flex-wrap sm:gap-2 my-4 lg:w-2/3 mx-5 lg:mx-auto">
         {products.map((product, index) => (
           <Link
             key={index}
             to={`/product/${product.id}`}
-            className="border border-primary-400 rounded-lg text-primary-400 bg-white mx-auto w-40 h-56 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg"
+            className="border border-primary-400 rounded-lg text-primary-400 bg-white w-36 h-52 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg mx-auto my-3"
           >
             <img
               src={`http://localhost:3005/uploads/${product.image}`}
               alt="Product"
-              className="w-40 h-40 sm:w-48 sm:h-48 object-cover"
+              className="w-36 h-36 sm:w-48 sm:h-48 object-cover"
             />
             <div className="p-2">
               <h3 className="line-clamp-1 font-medium">{product.title}</h3>

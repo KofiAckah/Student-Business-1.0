@@ -38,7 +38,9 @@ export const PostProduct = async (req, res) => {
 
 export const GetProduct = async (req, res) => {
   try {
-    const products = await Product.find().populate("user", "username");
+    const products = await Product.find()
+      .sort({ createdAt: -1 })
+      .populate("user", "username");
     const formattedProducts = products.map((product) => ({
       id: product._id,
       title: product.title,
