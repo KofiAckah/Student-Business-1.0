@@ -79,20 +79,6 @@ export default function ViewSeller() {
           <p className="font-semibold">Bio</p>
           {seller.bio !== "" ? <p>{seller.bio}</p> : <p>No Info</p>}
         </div>
-        <div className="md:w-1/3 p-2 rounded-lg">
-          <Link>
-            <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
-              <FontAwesomeIcon icon={faMessage} className="mr-3" /> Message the
-              Seller
-            </button>
-          </Link>
-          <Link to={`tel:0${seller.phone}`}>
-            <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
-              <FontAwesomeIcon icon={faPhone} className="mr-3" /> 0
-              {seller.phone}
-            </button>
-          </Link>
-        </div>
         <div className="bg-secondary-100 md:w-1/3 p-2 m-2 rounded-lg self-stretch mt-4 mb-2">
           <h1 className="font-semibold text-center text-lg">Safety tips</h1>
           <p>
@@ -111,6 +97,20 @@ export default function ViewSeller() {
             <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
             Only pay if you&apos;re satisfied
           </p>
+        </div>
+        <div className="md:w-1/3 p-2 rounded-lg">
+          <Link>
+            <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
+              <FontAwesomeIcon icon={faMessage} className="mr-3" /> Message the
+              Seller
+            </button>
+          </Link>
+          <Link to={`tel:0${seller.phone}`}>
+            <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
+              <FontAwesomeIcon icon={faPhone} className="mr-3" /> 0
+              {seller.phone}
+            </button>
+          </Link>
         </div>
       </div>
     </div>

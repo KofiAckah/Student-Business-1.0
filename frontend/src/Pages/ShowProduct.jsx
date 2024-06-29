@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
   faMessage,
+  faCheck,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -43,7 +44,7 @@ export default function ShowProduct() {
             className="w-full h-72 sm:h-80 md:h-96 object-contain rounded-lg bg-gray-200 shadow-md"
           />
         </div>
-        <div className="mx-auto w-10/12">
+        <div className="mx-auto w-10/12 md:mt-10">
           <div className="bg-secondary-100 p-2 rounded-lg max-md:mt-4">
             <p className="text-primary-400 font-bold">{product.title}</p>
             <p className="text-red-400 font-semibold">
@@ -61,6 +62,25 @@ export default function ShowProduct() {
             </p>
             <p className="text-primary-400 font-bold">Description:</p>
             <p>{product.description === "" ? "..." : product.description}</p>
+          </div>
+          <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2">
+            <h1 className="font-semibold text-center text-lg">Safety tips</h1>
+            <p>
+              <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+              Avoid paying in advance
+            </p>
+            <p>
+              <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+              Meet with the seller at a safe public place
+            </p>
+            <p>
+              <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+              Inspect the item and ensure it&apos;s exactly what you want
+            </p>
+            <p>
+              <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+              Only pay if you&apos;re satisfied
+            </p>
           </div>
           <Link>
             <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">

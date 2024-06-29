@@ -7,18 +7,22 @@ import sendMailVerify from "../../config/MailVerify.js";
 
 export const Register = async (req, res, next) => {
   try {
-    const { username, email, password, confirmPassword } = req.body;
-    if (!username || !email || !password || !confirmPassword) {
-      // return res.send("Please fill in all fields");
+    const { username, email, password, confirmPassword, phone, dob } = req.body;
+    if (
+      !username ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !phone ||
+      !dob
+    ) {
       return res.status(400).json({ msg: "Please fill in all fields" });
     }
     if (password !== confirmPassword) {
-      // return res.send("Passwords do not match");
       return res.status(400).json({ msg: "Passwords do not match" });
     }
     const user = await User.findOne({ email });
     if (user) {
-      // res.send("User already exists");
       return res.status(400).json({ msg: "User already exists" });
     } else {
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -26,6 +30,8 @@ export const Register = async (req, res, next) => {
         username,
         email,
         password: hashedPassword,
+        phone,
+        dob,
       });
       await newUser.save();
       // res.send("User registered successfully");

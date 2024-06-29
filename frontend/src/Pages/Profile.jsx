@@ -119,7 +119,7 @@ export default function Profile() {
                         {new Date(product.updatedAt).toLocaleDateString()}
                       </p>
                       <Link to={`/view-items/${product._id}`}>
-                        <button className="bg-primary-500 px-2 text-white rounded-md hover:bg-primary-400 sm:mt-2 max-sm:text-sm">
+                        <button className="bg-primary-500 p-2 text-white rounded-md hover:bg-primary-400 sm:mt-2 max-sm:text-sm">
                           View Product
                         </button>
                       </Link>

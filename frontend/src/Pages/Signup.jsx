@@ -12,6 +12,8 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [dob, setDob] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -24,6 +26,8 @@ export default function SignUp() {
         email,
         password,
         confirmPassword,
+        phone,
+        dob,
       });
       enqueueSnackbar(res.data.msg, { variant: "success" });
       enqueueSnackbar("Check email for verification", { variant: "info" });
@@ -83,6 +87,24 @@ export default function SignUp() {
               onClick={() => setShowPassword(!showPassword)}
               icon={showPassword ? faEye : faEyeSlash}
               className="absolute right-3 top-2 text-primary-500 hover:text-primary-400 cursor-pointer"
+            />
+          </div>
+          <div className="my-5 w-8/12 md:w-1/2 xl:w-1/3">
+            <input
+              className="loginInput"
+              type="number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="Phone"
+            />
+          </div>
+          <div className="my-5 w-8/12 md:w-1/2 xl:w-1/3">
+            <input
+              className="loginInput"
+              type="date"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+              placeholder="Date of Birth"
             />
           </div>
           <button type="submit" className="btnSubmit">
