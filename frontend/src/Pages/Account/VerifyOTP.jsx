@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
-import { CompanyName, Logo } from "../Components/Default";
+import { CompanyName, Logo } from "../../Components/Default";
 
 export default function VerifyOTP() {
   const [email, setEmail] = useState("");

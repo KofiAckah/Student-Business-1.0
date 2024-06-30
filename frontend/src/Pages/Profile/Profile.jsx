@@ -5,7 +5,7 @@ import { useSnackbar } from "notistack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-import NavBar from "../Components/NavBar";
+import NavBar from "../../Components/NavBar";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
@@ -127,7 +127,12 @@ export default function Profile() {
                   </div>
                   <hr className="my-2 border-primary-500" />
                   <div className="flex justify-between">
-                    <Link className="text-green-400">Edit</Link>
+                    <Link
+                      to={`/edit-items/${product._id}`}
+                      className="text-green-400"
+                    >
+                      Edit
+                    </Link>
                     <Link className="text-red-400">Delete</Link>
                   </div>
                 </div>

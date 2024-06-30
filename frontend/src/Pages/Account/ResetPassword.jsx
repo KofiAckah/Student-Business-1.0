@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
-import { CompanyName, Logo } from "../Components/Default";
+import { CompanyName, Logo } from "../../Components/Default";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 

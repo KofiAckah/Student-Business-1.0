@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 // Components
-import NavBar from "../Components/NavBar";
+import NavBar from "../../Components/NavBar";
 
 export default function ViewProduct() {
   const [product, setProduct] = useState("");
