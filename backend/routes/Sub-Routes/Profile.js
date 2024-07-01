@@ -78,28 +78,35 @@ export const ViewProduct = async (req, res) => {
 
 export const EditProduct = async (req, res) => {
   try {
+    const imageName = req.file ? req.file.filename : undefined;
     const product = await Product.findById(req.params.id);
     product.title = req.body.title;
     product.location = req.body.location;
     product.description = req.body.description;
     product.price = req.body.price;
-    product.image = req.body.image;
+    imageName !== undefined
+      ? (product.image = imageName)
+      : (product.image = req.body.image);
     product.category = req.body.category;
     product.categoryOthers = req.body.categoryOthers;
     product.condition = req.body.condition;
     product.negotiable = req.body.negotiable;
-    console.log("Product Iamge Name:", product.image);
+    console.log("Negotiable:", product.negotiable);
     if (
       !product.title ||
       !product.price ||
       !product.location ||
       !product.image ||
-      !product.category
+      !product.category ||
+      !product.negotiable
     ) {
       return res.status(400).json({ msg: "Please fill in all fields" });
     }
+    console.log("Negotiable", product.negotiable);
     await product.save();
+    console.log("Negotiable", product.negotiable);
     res.status(200).json(product);
+    console.log("Negotiable", product.negotiable);
   } catch (error) {
     res
       .status(500)
