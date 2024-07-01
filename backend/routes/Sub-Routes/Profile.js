@@ -1,5 +1,6 @@
 import { User } from "../../models/User.js";
 import { Product } from "../../models/Product.js";
+import e from "express";
 
 export const GetSeller = async (req, res) => {
   try {
@@ -79,16 +80,31 @@ export const EditProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     product.title = req.body.title;
-    product.price = req.body.price;
+    product.location = req.body.location;
     product.description = req.body.description;
-    product.category = req.body.category;
+    product.price = req.body.price;
     product.image = req.body.image;
+    product.category = req.body.category;
+    product.categoryOthers = req.body.categoryOthers;
+    product.condition = req.body.condition;
+    product.negotiable = req.body.negotiable;
+    console.log("Product Iamge Name:", product.image);
+    if (
+      !product.title ||
+      !product.price ||
+      !product.location ||
+      !product.image ||
+      !product.category
+    ) {
+      return res.status(400).json({ msg: "Please fill in all fields" });
+    }
     await product.save();
     res.status(200).json(product);
   } catch (error) {
     res
       .status(500)
       .json({ msg: "Internal server error", error: error.message });
+    console.log("error Message", error.message);
   }
 };
 
