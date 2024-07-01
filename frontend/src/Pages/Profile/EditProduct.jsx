@@ -15,7 +15,7 @@ export default function EditProduct() {
   const [category, setCategory] = useState("");
   const [categoryOthers, setCategoryOthers] = useState("");
   const [condition, setCondition] = useState("");
-  const [negotiable, setNegotiable] = useState(false);
+  const [negotiable, setNegotiable] = useState("");
   // const [imageName, setImageName] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const [categoryInfo, setCategoryInfo] = useState("");
@@ -108,14 +108,6 @@ export default function EditProduct() {
       setImagePreview(fileReader.result);
     };
     fileReader.readAsDataURL(e.target.files[0]);
-
-    // const file = e.target.files[0];
-    // const reader = new FileReader();
-    // reader.onloadend = () => {
-    //   setImage(file);
-    //   setImagePreview(reader.result);
-    // };
-    // reader.readAsDataURL(file);
   };
 
   const handleEditProduct = async (e) => {

@@ -91,22 +91,17 @@ export const EditProduct = async (req, res) => {
     product.categoryOthers = req.body.categoryOthers;
     product.condition = req.body.condition;
     product.negotiable = req.body.negotiable;
-    console.log("Negotiable:", product.negotiable);
     if (
       !product.title ||
       !product.price ||
       !product.location ||
       !product.image ||
-      !product.category ||
-      !product.negotiable
+      !product.category
     ) {
       return res.status(400).json({ msg: "Please fill in all fields" });
     }
-    console.log("Negotiable", product.negotiable);
     await product.save();
-    console.log("Negotiable", product.negotiable);
     res.status(200).json(product);
-    console.log("Negotiable", product.negotiable);
   } catch (error) {
     res
       .status(500)
