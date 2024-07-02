@@ -3,27 +3,28 @@ import axios from "axios";
 import { CompanyName, Logo } from "../Components/Default";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  // faBars,
-  // faTimes,
   faUser,
   faMessage,
   faBell,
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 
 function Nav() {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:3005/account/logout");
+      await axios.get("http://localhost:3005/account/logout", {
+        withCredentials: true,
+      });
       navigate("/login");
-      console.log("Logged out");
     } catch (error) {
-      console.log("Error logging out");
-      console.log(error);
+      enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
   };
 
@@ -33,7 +34,6 @@ function Nav() {
 
   return (
     <div className="sticky top-0 shadow-2xl block z-10">
-      {/* Nav Bar for Desktop */}
       <nav className="flex py-2 max-md:py-3 px-5 justify-between items-center bg-red-400">
         <Link to="/">
           <div className="flex items-center">
@@ -101,14 +101,6 @@ function Nav() {
             </Link>
           </li>
         </ul>
-
-        {/* Nav Bar for Mobile */}
-        {/* <FontAwesomeIcon
-          onClick={handleMenu}
-          icon={open ? faBars : faTimes}
-          className="sm:hidden"
-          bounce={open ? false : true}
-        /> */}
       </nav>
       <ul
         className={`${
@@ -131,27 +123,6 @@ function Nav() {
           </Link>
         </li>
       </ul>
-      {/* <ul
-        className={` ${
-          open ? "hidden" : "block"
-        } flex flex-col sm:hidden bg-primary-500 justify-center items-center gap-5 p-5`}
-      >
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link>Notifications</Link>
-        </li>
-        <li>
-          <Link to="/sell">Sell</Link>
-        </li>
-        <li>
-          <Link>Messages</Link>
-        </li>
-        <li>
-          <Link>Profile</Link>
-        </li>
-      </ul> */}
     </div>
   );
 }

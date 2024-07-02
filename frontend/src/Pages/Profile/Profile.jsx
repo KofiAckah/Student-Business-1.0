@@ -6,12 +6,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 import NavBar from "../../Components/NavBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const [user, setUser] = useState({});
   const [products, setProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentProductId, setCurrentProductId] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -42,7 +45,27 @@ export default function Profile() {
       }
     };
     fetchProducts();
-  }, [enqueueSnackbar]);
+  }, [enqueueSnackbar, navigate]);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:3005/user/delete-product/${currentProductId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      enqueueSnackbar(`Product deleted successfully.`, {
+        variant: "success",
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      setIsModalOpen(false);
+    } catch (error) {
+      enqueueSnackbar("Failed to delete the product", { variant: "error" });
+    }
+  };
 
   return (
     <div className="bg-secondary-100">
@@ -133,10 +156,36 @@ export default function Profile() {
                     >
                       Edit
                     </Link>
-                    <Link className="text-red-400">Delete</Link>
+                    <button
+                      onClick={() => {
+                        setCurrentProductId(product._id);
+                        setIsModalOpen(true);
+                      }}
+                      className="text-red-400"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               ))}
+              {isModalOpen && (
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+                  <div className="bg-white p-4 rounded">
+                    <p>Are you sure you want to delete this item?</p>
+                    <div className="flex justify-between">
+                      <button onClick={handleDelete} className="text-red-500">
+                        Yes, Delete
+                      </button>
+                      <button
+                        onClick={() => setIsModalOpen(false)}
+                        className="text-blue-500"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
