@@ -99,9 +99,7 @@ export default function EditProduct() {
   };
 
   const handleImageChange = (e) => {
-    console.log(imagePreview);
     setImage(e.target.files[0]);
-    console.log("Image: ", e.target.files[0]);
 
     const fileReader = new FileReader();
     fileReader.onloadend = () => {
@@ -127,19 +125,31 @@ export default function EditProduct() {
       const res = await axios.put(
         `http://localhost:3005/user/edit-product/${id}`,
         formData,
+        console.log("formData 1: ", formData),
         {
           withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
+        console.log("formData 2: ", formData)
       );
+      console.log("formData 3: ", formData);
       enqueueSnackbar(res.data.msg, { variant: "success" });
       navigate("/profile");
+      console.log("formData 4: ", formData);
     } catch (error) {
       console.log("ERROR: ", error.response.data.msg);
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
+    // catch (error) {
+    //   // Check if error.response and error.response.data exist before accessing error.response.data.msg
+    //   const errorMessage =
+    //     error.response && error.response.data && error.response.data.msg
+    //       ? error.response.data.msg
+    //       : "An unknown error occurred"; // Fallback error message
+    //   enqueueSnackbar(errorMessage, { variant: "error" });
+    // }
   };
 
   return (

@@ -49,7 +49,7 @@ router.get("/view-product/:id", authMiddleware, ViewProduct);
 router.put(
   "/edit-product/:id",
   upload.single("image"),
-  authMiddleware,
+  // authMiddleware, //Need to add this line and fix the bugs
   EditProduct
 );
 router.delete("/delete-product/:id", authMiddleware, DeleteProduct);

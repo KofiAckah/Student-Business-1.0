@@ -1,6 +1,5 @@
 import { User } from "../../models/User.js";
 import { Product } from "../../models/Product.js";
-import e from "express";
 
 export const GetSeller = async (req, res) => {
   try {
@@ -101,7 +100,7 @@ export const EditProduct = async (req, res) => {
       return res.status(400).json({ msg: "Please fill in all fields" });
     }
     await product.save();
-    res.status(200).json(product);
+    res.status(200).json({ msg: "Product edited successfully" });
   } catch (error) {
     res
       .status(500)
