@@ -105,7 +105,7 @@ function Nav() {
       <ul
         className={`${
           open ? "hidden" : "block"
-        } bg-white w-32 absolute right-0 text-primary-400 font-medium border border-red-400 rounded-lg shadow-md overflow-hidden mr-2`}
+        } bg-white w-24 absolute right-0 text-primary-400 font-medium border border-red-400 rounded-lg shadow-md overflow-hidden mr-2`}
       >
         <li className="hover:bg-red-400 w-full hover:text-white">
           <Link to="/profile" className="p-2">
@@ -114,7 +114,7 @@ function Nav() {
         </li>
         <li className="hover:bg-red-400 w-full hover:text-white">
           <Link to="/edit-profile" className="p-2">
-            Edit Profile
+            Settings
           </Link>
         </li>
         <li className="hover:bg-red-400 w-full hover:text-white">
