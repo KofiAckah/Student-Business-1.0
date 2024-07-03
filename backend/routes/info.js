@@ -43,7 +43,12 @@ router.get("/", (req, res) => {
 
 router.get("/get-seller/:id", authMiddleware, GetSeller);
 router.get("/get-profile", authMiddleware, GetProfile);
-router.put("/update-profile", authMiddleware, UpdateProfile);
+router.put(
+  "/update-profile",
+  upload.single("image"),
+  authMiddleware,
+  UpdateProfile
+);
 router.get("/seller-products", authMiddleware, SellerProducts);
 router.get("/view-product/:id", authMiddleware, ViewProduct);
 router.put(

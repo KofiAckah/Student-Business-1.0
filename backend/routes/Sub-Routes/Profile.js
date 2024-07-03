@@ -27,7 +27,7 @@ export const GetSeller = async (req, res) => {
 export const GetProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select(
-      "username email createdAt image phone bio"
+      "username email createdAt image phone bio dob"
     );
     res.status(200).json(user);
   } catch (error) {
@@ -39,17 +39,30 @@ export const GetProfile = async (req, res) => {
 
 export const UpdateProfile = async (req, res) => {
   try {
+    const imageName = req.file ? req.file.filename : undefined;
     const user = await User.findById(req.user._id);
     user.username = req.body.username;
     user.email = req.body.email;
     user.phone = req.body.phone;
+    imageName !== undefined
+      ? (user.image = imageName)
+      : (user.image = req.body.image);
     user.bio = req.body.bio;
+    user.dob = req.body.dob;
+    console.log("DOB", dob);
+    if (!user.username || !user.email || !user.phone) {
+      return res.status(400).json({ msg: "Please fill in all fields" });
+    }
+    if (!dob || dob === undefined) {
+      return res.status(400).json({ msg: "Please fill the DOB" });
+    }
     await user.save();
-    res.status(200).json(user);
+    res.status(200).json({ msg: "Profile updated successfully" });
   } catch (error) {
     res
       .status(500)
       .json({ msg: "Internal server error", error: error.message });
+    console.log("error", error.message);
   }
 };
 

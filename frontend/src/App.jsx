@@ -12,6 +12,7 @@ import ShowProduct from "./Pages/ShowProduct";
 import ViewSeller from "./Pages/ViewSeller";
 // User Routes
 import Profile from "./Pages/Profile/Profile";
+import EditProfile from "./Pages/Profile/EditProfile";
 import ViewProduct from "./Pages/Profile/ViewProduct";
 import EditProduct from "./Pages/Profile/EditProduct";
 
@@ -26,6 +27,7 @@ export default function App() {
       <Route path="/seller/:id" element={<ViewSeller />} />
       {/* User Routes */}
       <Route path="/profile" element={<Profile />} />
+      <Route path="/edit-profile" element={<EditProfile />} />
       <Route path="/view-items/:id" element={<ViewProduct />} />
       <Route path="/edit-items/:id" element={<EditProduct />} />
       {/* Accounts Routes */}

@@ -142,14 +142,6 @@ export default function EditProduct() {
       console.log("ERROR: ", error.response.data.msg);
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
-    // catch (error) {
-    //   // Check if error.response and error.response.data exist before accessing error.response.data.msg
-    //   const errorMessage =
-    //     error.response && error.response.data && error.response.data.msg
-    //       ? error.response.data.msg
-    //       : "An unknown error occurred"; // Fallback error message
-    //   enqueueSnackbar(errorMessage, { variant: "error" });
-    // }
   };
 
   return (
