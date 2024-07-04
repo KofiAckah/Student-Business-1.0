@@ -15,6 +15,8 @@ export const authMiddleware = async (req, res, next) => {
     if (!req.user) {
       return res.status(401).json({ msg: "Authorization denied" });
     }
+    // req.user = req.user.toJSON();
+    // req.user = user
     next();
   } catch (err) {
     // res.status(401).json({ msg: "Token is not valid" });
