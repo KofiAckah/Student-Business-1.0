@@ -7,15 +7,8 @@ import sendMailVerify from "../../config/MailVerify.js";
 
 export const Register = async (req, res, next) => {
   try {
-    const { username, email, password, confirmPassword, phone, dob } = req.body;
-    if (
-      !username ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !phone ||
-      !dob
-    ) {
+    const { username, email, password, confirmPassword, phone } = req.body;
+    if (!username || !email || !password || !confirmPassword || !phone) {
       return res.status(400).json({ msg: "Please fill in all fields" });
     }
     if (password !== confirmPassword) {
@@ -31,7 +24,6 @@ export const Register = async (req, res, next) => {
         email,
         password: hashedPassword,
         phone,
-        dob,
       });
       await newUser.save();
       // res.send("User registered successfully");

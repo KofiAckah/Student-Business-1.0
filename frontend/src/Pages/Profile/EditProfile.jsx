@@ -12,7 +12,6 @@ export default function EditProfile() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [bio, setBio] = useState("");
-  const [dob, setDob] = useState("");
   const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
@@ -28,7 +27,6 @@ export default function EditProfile() {
         setEmail(res.data.email);
         setPhone(res.data.phone);
         setBio(res.data.bio);
-        setDob(res.data.dob);
         setImage(res.data.image);
         setImagePreview(`http://localhost:3005/uploads/${res.data.image}`);
       } catch (error) {
@@ -55,7 +53,6 @@ export default function EditProfile() {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("bio", bio);
-    formData.append("dob", dob);
     formData.append("image", image);
 
     try {
@@ -151,20 +148,6 @@ export default function EditProfile() {
             placeholder="Bio"
             className="loginInput h-20 sm:h-32"
             style={{ resize: "none" }}
-          />
-        </div>
-        <div className="my-2 sm:my-3 w-10/12 md:w-2/3 xl:w-1/2">
-          <label htmlFor="dob">Date of Birth</label>
-          <p>{new Date(dob).toLocaleDateString()}</p>
-          <input
-            type="date"
-            name="dob"
-            id="dob"
-            value={dob}
-            // value={new Date(dob).toLocaleDateString()}
-            onChange={(e) => setDob(e.target.value)}
-            placeholder="Date of Birth"
-            className="loginInput"
           />
         </div>
         <button className="btnSubmit w-10/12 md:w-2/3 xl:w-1/2 my-2 sm:my-3 mb-5 sm:mb-7">
