@@ -12,16 +12,21 @@ import {
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 
+import { useAuthContext } from "./authContext";
+
 function Nav() {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const { setAuth } = useAuthContext();
 
   const handleLogout = async () => {
     try {
       await axios.get("http://localhost:3005/account/logout", {
         withCredentials: true,
       });
+      localStorage.removeItem("auth");
+      setAuth(null);
       navigate("/login");
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });

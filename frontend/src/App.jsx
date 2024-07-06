@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 // Account Routes
 import Login from "./Pages/Account/Login";
@@ -16,17 +16,43 @@ import EditProfile from "./Pages/Profile/EditProfile";
 import ViewProduct from "./Pages/Profile/ViewProduct";
 import EditProduct from "./Pages/Profile/EditProduct";
 
+import { useAuthContext } from "./Components/authContext";
 import "./App.css";
 
 export default function App() {
+  const { auth } = useAuthContext();
+  console.log("AUTH: ", auth);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/sell" element={<Sell />} />
-      <Route path="/product/:id" element={<ShowProduct />} />
+      {/* <Route path="/sell" element={<Sell />} /> */}
+      <Route
+        path="/sell"
+        element={
+          auth ? (
+            <Sell />
+          ) : (
+            // : <Login />} />
+            <Navigate to="/login" />
+          )
+        }
+      />
+      {/* <Route path="/product/:id" element={<ShowProduct />} /> */}
+      <Route path="/product/:id" element={auth ? <ShowProduct /> : <Login />} />
       <Route path="/seller/:id" element={<ViewSeller />} />
       {/* User Routes */}
-      <Route path="/profile" element={<Profile />} />
+      {/* <Route path="/profile" element={<Profile />} /> */}
+      <Route
+        path="/profile"
+        element={
+          auth ? (
+            <Profile />
+          ) : (
+            <Login />
+            // <Navigate to="/login" />
+          )
+        }
+      />
       <Route path="/edit-profile" element={<EditProfile />} />
       <Route path="/view-items/:id" element={<ViewProduct />} />
       <Route path="/edit-items/:id" element={<EditProduct />} />

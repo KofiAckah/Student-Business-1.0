@@ -5,11 +5,14 @@ import { Logo, CompanyName } from "../../Components/Default";
 import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 
+import { useAuthContext } from "../../Components/authContext";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const { setAuth } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,8 +23,14 @@ export default function Login() {
           email,
           password,
         },
-        { withCredentials: true }
+        { withCredentials: true },
+        { body: JSON.stringify({ email, password }) }
       );
+
+      const data = res.data.token;
+
+      localStorage.setItem("auth", data);
+      setAuth(data);
 
       enqueueSnackbar(res.data.msg, { variant: "success" });
       navigate("/");

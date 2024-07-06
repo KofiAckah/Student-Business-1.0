@@ -29,7 +29,7 @@ export const Login = async (req, res, next) => {
         res.cookie("token", token, { httpOnly: true });
 
         // res.send("User logged in successfully");
-        res.status(200).json({ msg: "User logged in successfully" });
+        res.status(200).json({ msg: "User logged in successfully", token });
       } else {
         // res.send("Invalid credentials");
         return res.status(400).json({ msg: "Invalid credentials" });
