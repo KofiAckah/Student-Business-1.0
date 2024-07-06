@@ -82,7 +82,7 @@ function Nav() {
             </Link>
           </li>
           <li>
-            <Link className="group relative">
+            <Link to="/messages" className="group relative">
               <FontAwesomeIcon
                 icon={faMessage}
                 className="p-2 rounded-lg text-white hover:text-red-400 hover:bg-white border border-white"

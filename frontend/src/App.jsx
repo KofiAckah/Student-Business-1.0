@@ -15,13 +15,14 @@ import Profile from "./Pages/Profile/Profile";
 import EditProfile from "./Pages/Profile/EditProfile";
 import ViewProduct from "./Pages/Profile/ViewProduct";
 import EditProduct from "./Pages/Profile/EditProduct";
+// Messages Routes
+import Message from "./Pages/Messages/Message";
 
 import { useAuthContext } from "./Components/authContext";
 import "./App.css";
 
 export default function App() {
   const { auth } = useAuthContext();
-  console.log("AUTH: ", auth);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -56,6 +57,8 @@ export default function App() {
       <Route path="/edit-profile" element={<EditProfile />} />
       <Route path="/view-items/:id" element={<ViewProduct />} />
       <Route path="/edit-items/:id" element={<EditProduct />} />
+      {/* Messages Routes */}
+      <Route path="/messages" element={<Message />} />
       {/* Accounts Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
