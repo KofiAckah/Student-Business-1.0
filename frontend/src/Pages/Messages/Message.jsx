@@ -10,6 +10,7 @@ import Conversation from "../../Components/Conversation";
 
 export default function Message() {
   const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -37,10 +38,17 @@ export default function Message() {
           <h2 className="text-center text-xl font-bold pb-2 sticky top-0 bg-white border-b border-primary-300">
             My Messages
           </h2>
+          {/* to={`/messages/${user.username}`} */}
           {users.map((user, index) => (
-            <Link to={`/messages/${user.username}`} key={index}>
+            <div
+              key={index}
+              onClick={() => setSelectedUser(user.username)}
+              className={`${
+                selectedUser === user.username ? "bg-secondary-100" : "bg-white"
+              }`}
+            >
               <MessagesUsers username={user.username} image={user.profilePic} />
-            </Link>
+            </div>
           ))}
         </div>
         <div className="md:col-span-2 bg-red-600">
