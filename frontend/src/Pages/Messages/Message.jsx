@@ -53,7 +53,7 @@ export default function Message() {
               }}
               className={`${
                 selectedUser === user.username ? "bg-secondary-100" : "bg-white"
-              }`}
+              } cursor-pointer`}
             >
               <MessagesUsers username={user.username} image={user.profilePic} />
             </div>
@@ -62,9 +62,12 @@ export default function Message() {
         <div className="md:col-span-2 relative bg-white h-full overflow-auto">
           {selectedUser ? (
             <div>
-              <Conversation selectedUser={sendId} userObject={userObject}/>
+              <Conversation selectedUser={sendId} userObject={userObject} />
               <div className="bg-white">
-                <SendMessage selectedUser={sendId} />
+                <SendMessage
+                  receiverId={sendId}
+                  className="bg-white p-2 flex items-center"
+                />
               </div>
             </div>
           ) : (
@@ -81,7 +84,7 @@ export default function Message() {
           )}
         </div>
       </div>
-      <div className="h-20"></div>
+      <div className="h-4"></div>
     </div>
   );
 }

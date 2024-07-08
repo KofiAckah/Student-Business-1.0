@@ -3,10 +3,10 @@ import { useSnackbar } from "notistack";
 import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-export default function SendMessage({ selectedUser }) {
+export default function SendMessage({ receiverId, className }) {
   const [message, setMessage] = useState("");
   const { enqueueSnackbar } = useSnackbar();
-  const id = selectedUser;
+  const id = receiverId;
 
   const sendMessage = async () => {
     try {
@@ -26,7 +26,7 @@ export default function SendMessage({ selectedUser }) {
     }
   };
   return (
-    <div className="bg-white p-2 flex items-center">
+    <div className={`${className}`}>
       <textarea
         type="text"
         className="flex-1 border border-black h-20 p-2 rounded-lg mr-2"
