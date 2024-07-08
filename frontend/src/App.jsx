@@ -26,8 +26,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      {/* <Route path="/sell" element={<Sell />} /> */}
-      <Route
+      <Route path="/sell" element={<Sell />} />
+      {/* <Route
         path="/sell"
         element={
           auth ? (
@@ -37,13 +37,13 @@ export default function App() {
             <Navigate to="/login" />
           )
         }
-      />
-      {/* <Route path="/product/:id" element={<ShowProduct />} /> */}
-      <Route path="/product/:id" element={auth ? <ShowProduct /> : <Login />} />
+      /> */}
+      <Route path="/product/:id" element={<ShowProduct />} />
+      {/* <Route path="/product/:id" element={auth ? <ShowProduct /> : <Login />} /> */}
       <Route path="/seller/:id" element={<ViewSeller />} />
       {/* User Routes */}
-      {/* <Route path="/profile" element={<Profile />} /> */}
-      <Route
+      <Route path="/profile" element={<Profile />} />
+      {/* <Route
         path="/profile"
         element={
           auth ? (
@@ -53,7 +53,7 @@ export default function App() {
             // <Navigate to="/login" />
           )
         }
-      />
+      /> */}
       <Route path="/edit-profile" element={<EditProfile />} />
       <Route path="/view-items/:id" element={<ViewProduct />} />
       <Route path="/edit-items/:id" element={<EditProduct />} />
