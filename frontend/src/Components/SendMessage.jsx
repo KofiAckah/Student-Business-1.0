@@ -21,6 +21,11 @@ export default function SendMessage({ receiverId, className }) {
         }
       );
       setMessage("");
+      {
+        message === ""
+          ? enqueueSnackbar("Please fill the form", { variant: "error" })
+          : enqueueSnackbar("Message sent", { variant: "success" });
+      }
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }

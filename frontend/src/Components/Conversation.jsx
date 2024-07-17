@@ -64,7 +64,7 @@ export default function Conversation({ selectedUser, userObject }) {
       </div>
       <div className="text-center border border-black mx-32 my-2 rounded-3xl text-red-600">
         <FontAwesomeIcon icon={faTriangleExclamation} />
-        <p>Do not pay in advance, including for delivery</p>
+        <p>Do not pay in advance</p>
       </div>
       {messages.map((message, index) => {
         const messageDate = dateOnly(message.createdAt);

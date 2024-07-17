@@ -17,6 +17,7 @@ import ViewProduct from "./Pages/Profile/ViewProduct";
 import EditProduct from "./Pages/Profile/EditProduct";
 // Messages Routes
 import Message from "./Pages/Messages/Message";
+import Chat from "./Pages/Messages/Chat";
 
 import { useAuthContext } from "./Components/authContext";
 import "./App.css";
@@ -59,6 +60,7 @@ export default function App() {
       <Route path="/edit-items/:id" element={<EditProduct />} />
       {/* Messages Routes */}
       <Route path="/messages" element={<Message />} />
+      <Route path="/chat/:id" element={<Chat />} />
       {/* Accounts Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />

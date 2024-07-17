@@ -19,6 +19,10 @@ export const createMessage = async (req, res) => {
       await conversation.save();
     }
 
+    if (message === "") {
+      return res.status(401).json({ msg: "Fill the message" });
+    }
+
     const newMessage = new Message({
       senderId,
       receiverId,
