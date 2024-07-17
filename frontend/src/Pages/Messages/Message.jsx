@@ -42,7 +42,6 @@ export default function Message() {
       window.removeEventListener("resize", handleResize);
     };
   }, [enqueueSnackbar]);
-  console.log("Hello: ", isWide);
 
   return (
     <div className="md:bg-secondary-100">
@@ -79,7 +78,11 @@ export default function Message() {
           <div className="md:col-span-2 relative bg-white h-full overflow-auto max-md:hidden">
             {selectedUser ? (
               <div>
-                <Conversation selectedUser={sendId} userObject={userObject} />
+                <Conversation
+                  selectedUser={sendId}
+                  userObject={userObject}
+                  className="h-[27rem]"
+                />
                 <div className="bg-white">
                   <SendMessage
                     receiverId={sendId}
@@ -111,7 +114,9 @@ export default function Message() {
             <Link
               to={`/chat/${user._id}`}
               key={index}
-              onClick={setUserObject(user)}
+              onClick={() => {
+                setUserObject(user);
+              }}
             >
               <MessagesUsers username={user.username} image={user.profilePic} />
             </Link>

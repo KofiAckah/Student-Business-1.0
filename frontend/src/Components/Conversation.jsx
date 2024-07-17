@@ -6,11 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faTriangleExclamation,
+  faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-export default function Conversation({ selectedUser, userObject }) {
+export default function Conversation({ selectedUser, userObject, className }) {
   const [messages, setMessages] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const id = selectedUser;
@@ -47,8 +48,14 @@ export default function Conversation({ selectedUser, userObject }) {
   let lastDisplayedDate = "";
 
   return (
-    <div className="h-[27rem] bg-secondary-100 overflow-auto">
+    <div className={`${className} bg-secondary-100 overflow-auto`}>
       <div className="flex sticky top-0 bg-white p-2 items-center">
+        <Link to="/messages" className=" md:hidden">
+          <FontAwesomeIcon
+            icon={faChevronLeft}
+            className="ml-2 w-5 h-5 text-green-400"
+          />
+        </Link>
         <div className="w-12 h-12 overflow-hidden mx-3 rounded-full border border-green-400">
           {image !== "" ? (
             <img
@@ -62,7 +69,7 @@ export default function Conversation({ selectedUser, userObject }) {
         </div>
         <p>{name}</p>
       </div>
-      <div className="text-center border border-black mx-32 my-2 rounded-3xl text-red-600">
+      <div className="text-center border border-black mx-20 sm:mx-32 my-2 rounded-3xl text-red-600">
         <FontAwesomeIcon icon={faTriangleExclamation} />
         <p>Do not pay in advance</p>
       </div>
