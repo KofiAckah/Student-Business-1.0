@@ -18,6 +18,14 @@ import {
   EditProduct,
   DeleteProduct,
 } from "./Sub-Routes/Profile.js";
+import {
+  SearchProduct,
+  SearchByOnlyTitle,
+  SearchByOnlyCategory,
+  SearchByOnlyCondition,
+  SearchByPriceRange,
+  SearchByOnlyLocation,
+} from "./Sub-Routes/Search.js";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -58,5 +66,11 @@ router.put(
   EditProduct
 );
 router.delete("/delete-product/:id", authMiddleware, DeleteProduct);
+router.get("/search-product", SearchProduct);
+router.get("/search-by-title", SearchByOnlyTitle);
+router.get("/search-by-category", SearchByOnlyCategory);
+router.get("/search-by-condition", SearchByOnlyCondition);
+router.get("/search-by-price-range", SearchByPriceRange);
+router.get("/search-by-location", SearchByOnlyLocation);
 
 export default router;

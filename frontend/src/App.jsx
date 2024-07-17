@@ -1,4 +1,5 @@
-import { Navigate, Routes, Route } from "react-router-dom";
+// import { Navigate, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 // Account Routes
 import Login from "./Pages/Account/Login";
@@ -19,11 +20,11 @@ import EditProduct from "./Pages/Profile/EditProduct";
 import Message from "./Pages/Messages/Message";
 import Chat from "./Pages/Messages/Chat";
 
-import { useAuthContext } from "./Components/authContext";
+// import { useAuthContext } from "./Components/authContext";
 import "./App.css";
 
 export default function App() {
-  const { auth } = useAuthContext();
+  // const { auth } = useAuthContext();
   return (
     <Routes>
       <Route path="/" element={<Home />} />
