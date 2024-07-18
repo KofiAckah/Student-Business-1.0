@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faMessage,
-  faBell,
+  faSearch,
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -63,13 +63,13 @@ function Nav() {
             </Link>
           </li>
           <li>
-            <Link className="group relative">
+            <Link to="/search" className="group relative">
               <FontAwesomeIcon
-                icon={faBell}
+                icon={faSearch}
                 className="p-2 rounded-lg text-white hover:text-red-400 hover:bg-white border border-white"
               />
               <div className="absolute left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-sm text-white bg-black rounded invisible group-hover:visible">
-                Notifications
+                Search
               </div>
             </Link>
           </li>

@@ -7,7 +7,10 @@ export const SearchProduct = async (req, res) => {
 
     // Validate the query
     if (!query) {
-      return res.status(400).json({ message: "Search query is required" });
+      return res.status(400).json({
+        message: "Search query is required",
+        msg: "There must an input",
+      });
     }
 
     // Search for products that match the query
@@ -25,7 +28,10 @@ export const SearchProduct = async (req, res) => {
     if (products.length === 0) {
       return res
         .status(404)
-        .json({ message: "No products found matching the query" });
+        .json({
+          message: "No products found matching the query",
+          msg: "No matching product found",
+        });
     }
 
     // Return the found products to the client

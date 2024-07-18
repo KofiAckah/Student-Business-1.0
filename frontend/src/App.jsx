@@ -1,6 +1,7 @@
 // import { Navigate, Routes, Route } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
+import Search from "./Pages/Search";
 // Account Routes
 import Login from "./Pages/Account/Login";
 import SignUp from "./Pages/Account/Signup";
@@ -28,6 +29,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/search" element={<Search />} />
       <Route path="/sell" element={<Sell />} />
       {/* <Route
         path="/sell"
