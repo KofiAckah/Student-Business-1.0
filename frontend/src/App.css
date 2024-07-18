@@ -42,3 +42,8 @@ input[type="number"] {
     background-position: 0% 50%;
   }
 }
+
+/* Search Styling */
+.searchFilterBtn{
+  @apply mx-auto w-32 my-1 bg-white
+}

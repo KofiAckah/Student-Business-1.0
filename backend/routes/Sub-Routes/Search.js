@@ -26,12 +26,10 @@ export const SearchProduct = async (req, res) => {
 
     // Check if products were found
     if (products.length === 0) {
-      return res
-        .status(404)
-        .json({
-          message: "No products found matching the query",
-          msg: "No matching product found",
-        });
+      return res.status(404).json({
+        message: "No products found matching the query",
+        msg: "No matching product found",
+      });
     }
 
     // Return the found products to the client
@@ -52,7 +50,10 @@ export const SearchByOnlyTitle = async (req, res) => {
 
     // Validate the query
     if (!query) {
-      return res.status(400).json({ message: "Search query is required" });
+      return res.status(400).json({
+        message: "Search query is required",
+        msg: "There must an input",
+      });
     }
 
     // Search for products that match the query
@@ -63,9 +64,10 @@ export const SearchByOnlyTitle = async (req, res) => {
 
     // Check if products were found
     if (products.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No products found matching the query" });
+      return res.status(404).json({
+        message: "No products found matching the query",
+        msg: "No matching product found",
+      });
     }
 
     // Return the found products to the client
@@ -86,7 +88,10 @@ export const SearchByOnlyLocation = async (req, res) => {
 
     // Validate the query
     if (!query) {
-      return res.status(400).json({ message: "Search query is required" });
+      return res.status(400).json({
+        message: "Search query is required",
+        msg: "There must an input",
+      });
     }
 
     // Search for products that match the query
@@ -97,9 +102,10 @@ export const SearchByOnlyLocation = async (req, res) => {
 
     // Check if products were found
     if (products.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No products found matching the query" });
+      return res.status(404).json({
+        message: "No products found matching the query",
+        msg: "No matching product found",
+      });
     }
 
     // Return the found products to the client
@@ -120,7 +126,10 @@ export const SearchByOnlyCategory = async (req, res) => {
 
     // Validate the query
     if (!query) {
-      return res.status(400).json({ message: "Search query is required" });
+      return res.status(400).json({
+        message: "Search query is required",
+        msg: "There must an input",
+      });
     }
 
     // Search for products that match the query
@@ -131,9 +140,10 @@ export const SearchByOnlyCategory = async (req, res) => {
 
     // Check if products were found
     if (products.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No products found matching the query" });
+      return res.status(404).json({
+        message: "No products found matching the query",
+        msg: "No matching product found",
+      });
     }
 
     // Return the found products to the client
@@ -154,7 +164,10 @@ export const SearchByOnlyCondition = async (req, res) => {
 
     // Validate the query
     if (!query) {
-      return res.status(400).json({ message: "Search query is required" });
+      return res.status(400).json({
+        message: "Search query is required",
+        msg: "There must an input",
+      });
     }
 
     // Search for products that match the query
@@ -165,9 +178,10 @@ export const SearchByOnlyCondition = async (req, res) => {
 
     // Check if products were found
     if (products.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No products found matching the query" });
+      return res.status(404).json({
+        message: "No products found matching the query",
+        msg: "No matching product found",
+      });
     }
 
     // Return the found products to the client
@@ -201,9 +215,10 @@ export const SearchByPriceRange = async (req, res) => {
 
     // Check if products were found
     if (products.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "No products found matching the query" });
+      return res.status(404).json({
+        message: "No products found matching the query",
+        msg: "No matching product found",
+      });
     }
 
     // Return the found products to the client
