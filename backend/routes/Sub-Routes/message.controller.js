@@ -4,7 +4,7 @@ import { User } from "../../models/User.js";
 
 export const createMessage = async (req, res) => {
   try {
-    const { message } = req.body;
+    const { message, image } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
@@ -27,6 +27,7 @@ export const createMessage = async (req, res) => {
       senderId,
       receiverId,
       message,
+      image,
     });
 
     if (newMessage) {
