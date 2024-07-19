@@ -10,8 +10,11 @@ import NavBar from "../Components/NavBar";
 
 export default function Search() {
   const [query, setQuery] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
   const [products, setProducts] = useState([]);
   const [searchMode, setSearchMode] = useState("all");
+  const [category, setCategory] = useState("");
   const [displayFilter, setDisplayFilter] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -43,11 +46,43 @@ export default function Search() {
     }
   };
 
-  // search-by-location
   const handleSearchByLocation = async () => {
     try {
       const res = await axios.get(
         `http://localhost:3005/user/search-by-location?query=${query}`,
+        {
+          withCredentials: true,
+        }
+      );
+      setProducts(res.data);
+    } catch (error) {
+      enqueueSnackbar(error.response.data.msg, { variant: "error" });
+    }
+  };
+
+  const handleSearchByCategory = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3005/user/search-by-categoryandtitle?category=${category}&title=${query}`,
+        {
+          withCredentials: true,
+        }
+      );
+      setProducts(res.data);
+    } catch (error) {
+      enqueueSnackbar(error.response.data.msg, { variant: "error" });
+    }
+  };
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+
+  // search-by-price-range
+  const handleSearchByPriceRange = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3005/user/search-by-price-range?minPrice=${minPrice}&maxPrice=${maxPrice}`,
         {
           withCredentials: true,
         }
@@ -65,6 +100,12 @@ export default function Search() {
         break;
       case "location":
         handleSearchByLocation();
+        break;
+      case "category":
+        handleSearchByCategory();
+        break;
+      case "price":
+        handleSearchByPriceRange();
         break;
       default:
         handleAllSearch();
@@ -85,9 +126,33 @@ export default function Search() {
             <input
               type="text"
               placeholder="Search for a product"
-              className="loginInput"
+              className={`loginInput ${searchMode === "price" ? "hidden" : ""}`}
               onChange={(e) => setQuery(e.target.value)}
             />
+            <div
+              className={`${
+                searchMode !== "price" ? "hidden" : ""
+              } flex w-full justify-center`}
+            >
+              <div className="flex items-center justify-center flex-col mr-2">
+                <label>Min Value</label>
+                <input
+                  type="number"
+                  placeholder="Min value"
+                  className={`loginInput`}
+                  onChange={(e) => setMinPrice(e.target.value)}
+                />
+              </div>
+              <div className="flex items-center justify-center flex-col">
+                <label>Max Value</label>
+                <input
+                  type="number"
+                  placeholder="Max value"
+                  className={`loginInput`}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                />
+              </div>
+            </div>
             <button
               className="ml-4 text-white border border-white rounded-md p-1 px-2 group relative"
               onClick={() => setDisplayFilter(true)}
@@ -100,21 +165,26 @@ export default function Search() {
           </div>
           <div className="mt-4">
             <button
-              className="bg-primary-100 text-white p-2 rounded-md mr-4 w-20"
+              className="bg-primary-100 text-white p-2 rounded-md mr-4"
               onClick={handleFilter}
             >
               Search
             </button>
             <button
-              disabled={query === ""}
-              className={`bg-red-600 text-white p-2 rounded-md ml-4 w-20 ${
-                query === "" && "cursor-not-allowed"
-              }`}
+              className={`bg-red-600 text-white p-2 rounded-md ml-4 ${
+                products.length === 0 ? "hidden" : ""
+              } `}
               onClick={handleClear}
             >
-              Clear
+              Clear Results
             </button>
           </div>
+          <div
+            className={`${
+              displayFilter ? "block" : "hidden"
+            } fixed bg-white h-[100rem] w-full bg-opacity-50`}
+            onClick={() => setDisplayFilter(false)}
+          ></div>
           <div
             className={`fixed right-0 bg-black bg-opacity-50 h-[70%] w-[70%] sm:w-[23rem] top-16 ${
               displayFilter ? "block" : "hidden"
@@ -150,9 +220,12 @@ export default function Search() {
                 Category
               </label>
               <select
-                className="w-[50%] sm:w-[8rem] mx-auto"
-                // value={category}
-                // onChange={handleCategoryChange}
+                className={`w-[50%] sm:w-[8rem] mx-auto ${
+                  searchMode === "category" ? "bg-red-400" : ""
+                }`}
+                value={category}
+                onChange={handleCategoryChange}
+                onClick={() => setSearchMode("category")}
               >
                 <option value="">Category</option>
                 <option value="Clothes">Clothes</option>
@@ -164,23 +237,40 @@ export default function Search() {
                 <option value="Student Needs">Student Needs</option>
                 <option value="Others">Others</option>
               </select>
-              <label htmlFor="condition" className="mx-auto text-white mb-1">
-                Condition
-              </label>
-              <select
-                className="w-[50%] sm:w-[8rem] mx-auto"
-                // value={condition}
-                // onChange={(e) => setCondition(e.target.value)}
+              <button
+                className={`searchFilterBtn ${
+                  searchMode === "price" ? "bg-red-400" : ""
+                }`}
+                onClick={() => setSearchMode("price")}
               >
-                <option value="">Condition</option>
-                <option value="New">New</option>
-                <option value="Used">Used</option>
-              </select>
-              <button className="searchFilterBtn">Price</button>
+                Price
+              </button>
+              <button
+                className={`searchFilterBtn bg-red-600 mt-5`}
+                onClick={handleClear}
+              >
+                Clear Filter
+              </button>
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap sm:gap-2 my-4 lg:w-2/3 mx-5 lg:mx-auto">
+        {products.length !== 0 && searchMode === "title" && (
+          <p className="mt-4">Results of Only Product Name</p>
+        )}
+        {products.length !== 0 && searchMode === "location" && (
+          <p className="mt-4">Results of Only Location Name</p>
+        )}
+        {products.length !== 0 && searchMode === "category" && (
+          <p className="mt-4">Results of Category : {category}</p>
+        )}
+        {products.length !== 0 && searchMode === "price" && (
+          <>
+            <p className="mt-4">Prices Reseults</p>
+            <p className="">Min: {minPrice}</p>
+            <p className="">Max: {maxPrice}</p>
+          </>
+        )}
+        <div className="flex flex-wrap sm:gap-2 mb-4 lg:w-2/3 mx-5 lg:mx-auto">
           {products.map((product, index) => (
             <Link
               key={index}

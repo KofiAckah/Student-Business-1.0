@@ -22,9 +22,9 @@ import {
   SearchProduct,
   SearchByOnlyTitle,
   SearchByOnlyCategory,
-  SearchByOnlyCondition,
   SearchByPriceRange,
   SearchByOnlyLocation,
+  SearchByTitleAndCategory,
 } from "./Sub-Routes/Search.js";
 import { authMiddleware } from "../middleware/auth.js";
 
@@ -66,11 +66,11 @@ router.put(
   EditProduct
 );
 router.delete("/delete-product/:id", authMiddleware, DeleteProduct);
-router.get("/search-product", SearchProduct);
-router.get("/search-by-title", SearchByOnlyTitle);
-router.get("/search-by-category", SearchByOnlyCategory);
-router.get("/search-by-condition", SearchByOnlyCondition);
+router.get("/search-product", SearchProduct); // Done
+router.get("/search-by-title", SearchByOnlyTitle); // Done
+router.get("/search-by-location", SearchByOnlyLocation); // Done
+router.get("/search-by-category", SearchByOnlyCategory); // Not Using
 router.get("/search-by-price-range", SearchByPriceRange);
-router.get("/search-by-location", SearchByOnlyLocation);
+router.get("/search-by-categoryandtitle", SearchByTitleAndCategory); // Done
 
 export default router;
