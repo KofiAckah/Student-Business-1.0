@@ -12,10 +12,12 @@ import {
 
 // Components
 import NavBar from "../Components/NavBar";
+import SendMessage from "../Components/SendMessage";
 
 export default function ShowProduct() {
   const [product, setProduct] = useState({});
   const { enqueueSnackbar } = useSnackbar();
+  const [showMessage, setShowMessage] = useState(false);
   const { id } = useParams();
   useEffect(() => {
     const fetchProduct = async () => {
@@ -63,38 +65,50 @@ export default function ShowProduct() {
             <p className="text-primary-400 font-bold">Description:</p>
             <p>{product.description === "" ? "..." : product.description}</p>
           </div>
-          <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2">
-            <h1 className="font-semibold text-center text-lg">Safety tips</h1>
-            <p>
-              <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
-              Avoid paying in advance
-            </p>
-            <p>
-              <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
-              Meet with the seller at a safe public place
-            </p>
-            <p>
-              <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
-              Inspect the item and ensure it&apos;s exactly what you want
-            </p>
-            <p>
-              <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
-              Only pay if you&apos;re satisfied
-            </p>
-          </div>
-          <Link>
-            <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
+          <div>
+            <button
+              className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400"
+              onClick={() => setShowMessage(!showMessage)}
+            >
               <FontAwesomeIcon icon={faMessage} className="mr-3" />
-              Contact Seller
+              {showMessage ? "Hide Message Form" : "Send A Message"}
             </button>
-          </Link>
-          <Link to={`/seller/${product.id}`}>
-            <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
-              <FontAwesomeIcon icon={faUser} className="mr-3" /> View Seller
-              Profile
-            </button>
-          </Link>
+            {showMessage && (
+              <SendMessage
+                receiverId={product.userId}
+                className="flex justify-between mt-4"
+              />
+            )}
+            {/* <Link>
+            </Link> */}
+            <Link to={`/seller/${product.id}`}>
+              <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
+                <FontAwesomeIcon icon={faUser} className="mr-3" /> View Seller
+                Profile
+              </button>
+            </Link>
+          </div>
         </div>
+      </div>
+
+      <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2">
+        <h1 className="font-semibold text-center text-lg">Safety tips</h1>
+        <p>
+          <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+          Avoid paying in advance
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+          Meet with the seller at a safe public place
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+          Inspect the item and ensure it&apos;s exactly what you want
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+          Only pay if you&apos;re satisfied
+        </p>
       </div>
     </div>
   );

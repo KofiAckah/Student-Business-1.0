@@ -69,6 +69,7 @@ export const GetProductId = async (req, res) => {
       price: product.price,
       image: product.image,
       postedBy: product.user.username,
+      userId: product.user.id,
     };
     res.status(200).json(formattedProduct);
     // res.status(200).json(product);
