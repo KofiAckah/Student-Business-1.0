@@ -80,6 +80,17 @@ export default function Conversation({ selectedUser, userObject, className }) {
         return (
           <div key={index} ref={lastMessageRef}>
             {displayDate && <p className="text-center">{messageDate}</p>}
+            {message.image && (
+              <div className="mx-auto bg-white w-32 py-2 rounded-md">
+                <Link to={`${message.link}`}>
+                  <img
+                    src={`http://localhost:3005/uploads/${message.image}`}
+                    alt="Product Pic"
+                    className="w-24 h-24 object-cover mx-auto"
+                  />
+                </Link>
+              </div>
+            )}
             <div
               className={`w-full flex ${
                 message.senderId !== id ? "justify-end" : "justify-start"

@@ -77,6 +77,8 @@ export default function ShowProduct() {
               <SendMessage
                 receiverId={product.userId}
                 className="flex justify-between mt-4"
+                productLink={`http://localhost:5173/product/${product.id}`}
+                productImage={product.image}
               />
             )}
             {/* <Link>

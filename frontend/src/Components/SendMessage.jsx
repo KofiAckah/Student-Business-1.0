@@ -3,33 +3,45 @@ import { useSnackbar } from "notistack";
 import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
-export default function SendMessage({ receiverId, className }) {
+export default function SendMessage({
+  // eslint-disable-next-line react/prop-types
+  receiverId,
+  // eslint-disable-next-line react/prop-types
+  className,
+  // eslint-disable-next-line react/prop-types
+  productLink,
+  // eslint-disable-next-line react/prop-types
+  productImage,
+}) {
   const [message, setMessage] = useState("");
   const { enqueueSnackbar } = useSnackbar();
   const id = receiverId;
 
   const sendMessage = async () => {
+    if (message === "") {
+      enqueueSnackbar("Please fill the form", { variant: "error" });
+      return;
+    }
     try {
       await axios.post(
         `http://localhost:3005/message/send/${id}`,
         {
           to: id,
           message,
+          image: productImage,
+          link: productLink,
         },
         {
           withCredentials: true,
         }
       );
       setMessage("");
-      {
-        message === ""
-          ? enqueueSnackbar("Please fill the form", { variant: "error" })
-          : enqueueSnackbar("Message sent", { variant: "success" });
-      }
+      enqueueSnackbar("Message sent", { variant: "success" });
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
   };
+
   return (
     <div className={`${className}`}>
       <textarea

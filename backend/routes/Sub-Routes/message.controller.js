@@ -4,13 +4,21 @@ import { User } from "../../models/User.js";
 
 export const createMessage = async (req, res) => {
   try {
-    const { message, image } = req.body;
+    const { message, image, link } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
+
+    const senderIdChecker = req.user._id.toString().match(/([a-f\d]{24})/i)[0];
 
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     });
+
+    if (senderIdChecker === receiverId) {
+      return res
+        .status(401)
+        .json({ msg: "You can't send message to yourself" });
+    }
 
     if (!conversation) {
       conversation = new Conversation({
@@ -28,6 +36,7 @@ export const createMessage = async (req, res) => {
       receiverId,
       message,
       image,
+      link,
     });
 
     if (newMessage) {
