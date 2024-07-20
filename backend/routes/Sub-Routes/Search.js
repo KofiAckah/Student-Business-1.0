@@ -22,7 +22,7 @@ export const SearchProduct = async (req, res) => {
         { category: { $regex: query, $options: "i" } },
         { condition: { $regex: query, $options: "i" } },
       ],
-    });
+    }).sort({ createdAt: -1 });
 
     // Check if products were found
     if (products.length === 0) {
@@ -60,7 +60,7 @@ export const SearchByOnlyTitle = async (req, res) => {
     // Performing a case-insensitive search on 'title' field
     const products = await Product.find({
       title: { $regex: query, $options: "i" },
-    });
+    }).sort({ createdAt: -1 });
 
     // Check if products were found
     if (products.length === 0) {
@@ -98,7 +98,7 @@ export const SearchByOnlyLocation = async (req, res) => {
     // Performing a case-insensitive search on 'location' field
     const products = await Product.find({
       location: { $regex: query, $options: "i" },
-    });
+    }).sort({ createdAt: -1 });
 
     // Check if products were found
     if (products.length === 0) {
@@ -182,7 +182,7 @@ export const SearchByPriceRange = async (req, res) => {
     // Performing a search on 'price' field within the specified range
     const products = await Product.find({
       price: { $gte: minPrice, $lte: maxPrice },
-    });
+    }).sort({ createdAt: -1 });
 
     // Check if products were found
     if (products.length === 0) {
@@ -232,7 +232,7 @@ export const SearchByTitleAndCategory = async (req, res) => {
     }
 
     // Search for products matching both title and category
-    const products = await Product.find(searchQuery);
+    const products = await Product.find(searchQuery).sort({ createdAt: -1 });
 
     // Check if products were found
     if (products.length === 0) {
