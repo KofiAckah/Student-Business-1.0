@@ -17,6 +17,7 @@ import NavBar from "../Components/NavBar";
 export default function ViewSeller() {
   const { id } = useParams();
   const [seller, setSeller] = useState({});
+  const [products, setProducts] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     const fetchSeller = async () => {
@@ -28,6 +29,7 @@ export default function ViewSeller() {
           }
         );
         setSeller(res.data);
+        setProducts(res.data.products);
       } catch (error) {
         enqueueSnackbar(error.response.data.msg, { variant: "error" });
       }
@@ -77,7 +79,11 @@ export default function ViewSeller() {
       <div className="md:flex items-center text-primary-400 max-md:w-10/12 max-md:mx-auto lg:mx-32">
         <div className="bg-secondary-100 md:w-1/3 p-2 m-2 rounded-lg self-stretch mt-4 mb-2">
           <p className="font-semibold">Bio</p>
-          {seller.bio !== "" ? <p>{seller.bio}</p> : <p>No Info</p>}
+          {seller.bio !== "" ? (
+            <p className="whitespace-pre-wrap">{seller.bio}</p>
+          ) : (
+            <p>No Info</p>
+          )}
         </div>
         <div className="bg-secondary-100 md:w-1/3 p-2 m-2 rounded-lg self-stretch mt-4 mb-2">
           <h1 className="font-semibold text-center text-lg">Safety tips</h1>
@@ -112,6 +118,30 @@ export default function ViewSeller() {
             </button>
           </Link>
         </div>
+      </div>
+      <h1 className="text-primary-400 text-center font-semibold text-2xl mt-5">
+        Products by Seller
+      </h1>
+      <div className="flex flex-wrap sm:gap-2 my-4 lg:w-2/3 mx-5 lg:mx-auto">
+        {products.map((product, index) => (
+          <Link
+            key={index}
+            to={`/product/${product.id}`}
+            className="border border-primary-400 rounded-lg text-primary-400 bg-white w-36 h-52 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg mx-auto my-3"
+          >
+            <img
+              src={`http://localhost:3005/uploads/${product.image}`}
+              alt="Product"
+              className="w-36 h-36 sm:w-48 sm:h-48 object-cover"
+            />
+            <div className="p-2">
+              <h3 className="line-clamp-1 font-medium">{product.title}</h3>
+              <p className="text-red-400">
+                GH&#8373; {Number(product.price).toFixed(2)}
+              </p>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

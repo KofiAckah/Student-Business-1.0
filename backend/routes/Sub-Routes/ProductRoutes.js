@@ -68,6 +68,7 @@ export const GetProductId = async (req, res) => {
       description: product.description,
       price: product.price,
       image: product.image,
+      category: product.category,
       postedBy: product.user.username,
       userId: product.user.id,
     };

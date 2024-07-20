@@ -8,6 +8,9 @@ export const GetSeller = async (req, res) => {
       "user",
       "username email createdAt image phone bio"
     );
+    const products = await Product.find({ user: req.user._id }).sort({
+      createdAt: -1,
+    });
     const formattedProduct = {
       username: product.user.username,
       email: product.user.email,
@@ -15,6 +18,7 @@ export const GetSeller = async (req, res) => {
       phone: product.user.phone,
       bio: product.user.bio,
       yearJoin: product.user.createdAt,
+      products,
     };
     res.status(200).json(formattedProduct);
   } catch (error) {

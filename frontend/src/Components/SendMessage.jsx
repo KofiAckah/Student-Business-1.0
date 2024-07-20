@@ -9,7 +9,7 @@ export default function SendMessage({
   // eslint-disable-next-line react/prop-types
   className,
   // eslint-disable-next-line react/prop-types
-  productLink,
+  productId,
   // eslint-disable-next-line react/prop-types
   productImage,
 }) {
@@ -29,7 +29,7 @@ export default function SendMessage({
           to: id,
           message,
           image: productImage,
-          link: productLink,
+          link: productId,
         },
         {
           withCredentials: true,

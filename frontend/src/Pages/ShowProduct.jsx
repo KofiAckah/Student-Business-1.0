@@ -62,7 +62,13 @@ export default function ShowProduct() {
               <FontAwesomeIcon icon={faUser} className="mr-1 text-red-400" />
               {product.postedBy}
             </p>
-            <p className="text-primary-400 font-bold">Description:</p>
+            <p>
+              Category:{" "}
+              <Link className="text-red-400 font-bold">{product.category}</Link>
+            </p>
+            <p className="text-primary-400 font-bold whitespace-pre-wrap">
+              Description:
+            </p>
             <p>{product.description === "" ? "..." : product.description}</p>
           </div>
           <div>
@@ -77,12 +83,10 @@ export default function ShowProduct() {
               <SendMessage
                 receiverId={product.userId}
                 className="flex justify-between mt-4"
-                productLink={`http://localhost:5173/product/${product.id}`}
+                productId={product.id}
                 productImage={product.image}
               />
             )}
-            {/* <Link>
-            </Link> */}
             <Link to={`/seller/${product.id}`}>
               <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
                 <FontAwesomeIcon icon={faUser} className="mr-3" /> View Seller
@@ -93,7 +97,7 @@ export default function ShowProduct() {
         </div>
       </div>
 
-      <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2">
+      <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2 w-72 mx-auto">
         <h1 className="font-semibold text-center text-lg">Safety tips</h1>
         <p>
           <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />

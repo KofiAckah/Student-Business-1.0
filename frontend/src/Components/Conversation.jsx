@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 // eslint-disable-next-line react/prop-types
 export default function Conversation({ selectedUser, userObject, className }) {
   const [messages, setMessages] = useState([]);
+  const [products, setProducts] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const id = selectedUser;
   // eslint-disable-next-line react/prop-types
@@ -37,6 +38,29 @@ export default function Conversation({ selectedUser, userObject, className }) {
     };
     fetchMessages();
   }, [id, enqueueSnackbar]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:3005/account/get-product",
+          {
+            withCredentials: true,
+          }
+        );
+        setProducts(res.data);
+      } catch (error) {
+        enqueueSnackbar(error.response.data.msg, { variant: "error" });
+      }
+    };
+    fetchProducts();
+  }, [enqueueSnackbar]);
+
+  const filteredMessages = messages.filter(
+    (message) =>
+      message.link === "" ||
+      products.some((product) => product.id === message.link)
+  );
 
   const lastMessageRef = useRef();
   useEffect(() => {
@@ -73,7 +97,7 @@ export default function Conversation({ selectedUser, userObject, className }) {
         <FontAwesomeIcon icon={faTriangleExclamation} />
         <p>Do not pay in advance</p>
       </div>
-      {messages.map((message, index) => {
+      {filteredMessages.map((message, index) => {
         const messageDate = dateOnly(message.createdAt);
         const displayDate = messageDate !== lastDisplayedDate;
         lastDisplayedDate = messageDate;
@@ -82,7 +106,8 @@ export default function Conversation({ selectedUser, userObject, className }) {
             {displayDate && <p className="text-center">{messageDate}</p>}
             {message.image && (
               <div className="mx-auto bg-white w-32 py-2 rounded-md">
-                <Link to={`${message.link}`}>
+                {/* productLink={`http://localhost:5173/product/${product.id}`} */}
+                <Link to={`/product/${message.link}`}>
                   <img
                     src={`http://localhost:3005/uploads/${message.image}`}
                     alt="Product Pic"
@@ -103,7 +128,7 @@ export default function Conversation({ selectedUser, userObject, className }) {
                     : "bg-[#d9fec2] self-start ml-20"
                 } p-2 m-2 rounded-lg w-[fit-content] text-primary-400`}
               >
-                <p className={``}>{message.message}</p>
+                <p className={`whitespace-pre-wrap`}>{message.message}</p>
                 <p
                   className={`${
                     message.senderId === id ? "text-left" : "text-right"
