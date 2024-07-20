@@ -3,7 +3,14 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSliders, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSliders,
+  faTimes,
+  faArrowUpAZ,
+  faArrowDownZA,
+  faArrowDownShortWide,
+  faArrowDownWideShort,
+} from "@fortawesome/free-solid-svg-icons";
 
 // Components
 import NavBar from "../Components/NavBar";
@@ -17,6 +24,7 @@ export default function Search() {
   const [category, setCategory] = useState("");
   const [displayFilter, setDisplayFilter] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [sortedProducts, setSortedProducts] = useState([]);
 
   const handleAllSearch = async () => {
     try {
@@ -27,6 +35,7 @@ export default function Search() {
         }
       );
       setProducts(res.data);
+      setSortedProducts(res.data);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
@@ -41,6 +50,7 @@ export default function Search() {
         }
       );
       setProducts(res.data);
+      setSortedProducts(res.data);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
@@ -55,6 +65,7 @@ export default function Search() {
         }
       );
       setProducts(res.data);
+      setSortedProducts(res.data);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
@@ -69,6 +80,7 @@ export default function Search() {
         }
       );
       setProducts(res.data);
+      setSortedProducts(res.data);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
@@ -78,7 +90,6 @@ export default function Search() {
     setCategory(e.target.value);
   };
 
-  // search-by-price-range
   const handleSearchByPriceRange = async () => {
     try {
       const res = await axios.get(
@@ -88,6 +99,7 @@ export default function Search() {
         }
       );
       setProducts(res.data);
+      setSortedProducts(res.data);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
     }
@@ -112,8 +124,37 @@ export default function Search() {
     }
   };
 
+  const sortProductsByNameInAscendingOrder = () => {
+    const sorted = [...products].sort((a, b) => {
+      return a.title.localeCompare(b.title);
+    });
+    setSortedProducts(sorted);
+  };
+
+  const sortProductsByNameInDescendingOrder = () => {
+    const sorted = [...products].sort((a, b) => {
+      return b.title.localeCompare(a.title);
+    });
+    setSortedProducts(sorted);
+  };
+
+  const sortProductsByPriceInAscendingOrder = () => {
+    const sorted = [...products].sort((a, b) => {
+      return a.price - b.price;
+    });
+    setSortedProducts(sorted);
+  };
+
+  const sortProductsByPriceInDescendingOrder = () => {
+    const sorted = [...products].sort((a, b) => {
+      return b.price - a.price;
+    });
+    setSortedProducts(sorted);
+  };
+
   const handleClear = () => {
     setProducts([]);
+    setSortedProducts([]);
     setSearchMode("all");
   };
 
@@ -247,7 +288,7 @@ export default function Search() {
               </button>
               <button
                 className={`searchFilterBtn bg-red-600 mt-5`}
-                onClick={handleClear}
+                onClick={() => setSearchMode("all")}
               >
                 Clear Filter
               </button>
@@ -270,8 +311,36 @@ export default function Search() {
             <p className="">Max: {maxPrice}</p>
           </>
         )}
+        {products.length !== 0 && searchMode !== "price" && (
+          <div className="">
+            <FontAwesomeIcon
+              icon={faArrowUpAZ}
+              onClick={sortProductsByNameInAscendingOrder}
+              className="border border-black p-1 rounded-md cursor-pointer mt-2 md:w-6 md:h-6 hover:bg-gray-200 mr-2"
+            />
+            <FontAwesomeIcon
+              icon={faArrowDownZA}
+              onClick={sortProductsByNameInDescendingOrder}
+              className="border border-black p-1 rounded-md cursor-pointer mt-2 md:w-6 md:h-6 hover:bg-gray-200 ml-2"
+            />
+          </div>
+        )}
+        {products.length !== 0 && searchMode === "price" && (
+          <div className="">
+            <FontAwesomeIcon
+              icon={faArrowDownShortWide}
+              onClick={sortProductsByPriceInAscendingOrder}
+              className="border border-black p-1 rounded-md cursor-pointer mt-2 md:w-6 md:h-6 hover:bg-gray-200 mr-2"
+            />
+            <FontAwesomeIcon
+              icon={faArrowDownWideShort}
+              onClick={sortProductsByPriceInDescendingOrder}
+              className="border border-black p-1 rounded-md cursor-pointer mt-2 md:w-6 md:h-6 hover:bg-gray-200 ml-2"
+            />
+          </div>
+        )}
         <div className="flex flex-wrap sm:gap-2 mb-4 lg:w-2/3 mx-5 lg:mx-auto">
-          {products.map((product, index) => (
+          {sortedProducts.map((product, index) => (
             <Link
               key={index}
               to={`/product/${product._id}`}
@@ -290,12 +359,6 @@ export default function Search() {
               </div>
             </Link>
           ))}
-
-          {/* {products.length === 0 && !query && <p>Search for a product</p>} */}
-
-          {/* {products.length === 0 && <p>No products found matching the query</p>} */}
-
-          {/* {products.length === 0 && query && <p>Searching for products...</p>} */}
         </div>
       </div>
     </div>
