@@ -20,6 +20,15 @@ import EditProduct from "./Pages/Profile/EditProduct";
 // Messages Routes
 import Message from "./Pages/Messages/Message";
 import Chat from "./Pages/Messages/Chat";
+// Categories Rouets
+import Clothes from "./Pages/Categories/Clothes";
+import Food from "./Pages/Categories/Food";
+import Electronics from "./Pages/Categories/Electronics";
+import HomeAppliances from "./Pages/Categories/HomeAppliances";
+import Services from "./Pages/Categories/Services";
+import Software from "./Pages/Categories/Software";
+import StudentNeeds from "./Pages/Categories/StudentNeeds";
+import Others from "./Pages/Categories/Others";
 
 // import { useAuthContext } from "./Components/authContext";
 import "./App.css";
@@ -64,6 +73,15 @@ export default function App() {
       {/* Messages Routes */}
       <Route path="/messages" element={<Message />} />
       <Route path="/chat/:id" element={<Chat />} />
+      {/* Categories Routes*/}
+      <Route path="/clothes" element={<Clothes />} />
+      <Route path="/food" element={<Food />} />
+      <Route path="/electronics" element={<Electronics />} />
+      <Route path="/home-appliances" element={<HomeAppliances />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/software" element={<Software />} />
+      <Route path="/Student-needs" element={<StudentNeeds />} />
+      <Route path="/others" element={<Others />} />
       {/* Accounts Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
