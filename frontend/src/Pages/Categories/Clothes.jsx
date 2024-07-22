@@ -43,8 +43,8 @@ export default function Clothes() {
         </p>
         <div className="absolute top-0">
           <button
-            className={`text-lg px-2 bg-white rounded-br-md ${
-              showCategory ? "bg-primary-400 text-white" : "text-black"
+            className={`text-lg px-2 rounded-br-md ${
+              showCategory ? "bg-primary-400 text-white" : "bg-white text-black"
             }`}
             onClick={() => setShowCategory(!showCategory)}
           >

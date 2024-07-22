@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 // Components
 import NavBar from "../../Components/NavBar";
@@ -130,7 +130,10 @@ export default function ViewProduct() {
               </p>
               <p>{comment.comment}</p>
               <p className="absolute text-sm text-gray-400 right-0">
-                <span>{formatCreationTime(comment.createdAt)}</span>
+                <span>
+                  <FontAwesomeIcon icon={faClock} className="mr-1" />
+                  {formatCreationTime(comment.createdAt)}
+                </span>
               </p>
             </div>
           </div>

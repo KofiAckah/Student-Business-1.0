@@ -176,7 +176,13 @@ export default function Sell() {
             type="number"
             id="price"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              const regex = /^\d+(\.\d{0,2})?$/;
+              if (value === "" || regex.test(value)) {
+                setPrice(value);
+              }
+            }}
             placeholder="Price for product or service"
           />
           <p className="text-sm italic text-gray-600">
@@ -185,7 +191,10 @@ export default function Sell() {
           </p>
         </div>
         <div className="my-2 sm:my-3 w-10/12 md:w-2/3 xl:w-1/2 flex items-center justify-between overflow-hidden">
-          <label htmlFor="image" className="custom-file-upload">
+          <label
+            htmlFor="image"
+            className="border border-black inline-block cursor-pointer px-3 py-2"
+          >
             {imageName ? "Change Image" : "Upload Image"}
           </label>
           <input

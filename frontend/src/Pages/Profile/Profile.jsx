@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 // Components
 import NavBar from "../../Components/NavBar";
 import NoProductImage from "../../assets/No data.gif";
+import { formatCreationTime } from "../../Components/extractTime";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -140,13 +141,13 @@ export default function Profile() {
                         <span className="font-semibold text-orange-600">
                           Created:{" "}
                         </span>
-                        {new Date(product.createdAt).toLocaleDateString()}
+                        {formatCreationTime(product.createdAt)}
                       </p>
                       <p className="text-gray-500 text-sm">
                         <span className="font-semibold text-orange-600">
                           Updated:{" "}
                         </span>
-                        {new Date(product.updatedAt).toLocaleDateString()}
+                        {formatCreationTime(product.updatedAt)}
                       </p>
                       <Link to={`/view-items/${product._id}`}>
                         <button className="bg-primary-500 p-2 text-white rounded-md hover:bg-primary-400 sm:mt-2 max-sm:text-sm">

@@ -15,13 +15,6 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.custom-file-upload {
-  padding: 10px;
-  border: 1px solid #ccc;
-  display: inline-block;
-  cursor: pointer;
-}
-
 /* Code for the homa page mini background */
 .gradient {
   width: 100vw;
@@ -44,6 +37,6 @@ input[type="number"] {
 }
 
 /* Search Styling */
-.searchFilterBtn{
-  @apply mx-auto w-32 my-1 bg-white
+.searchFilterBtn {
+  @apply mx-auto w-32 my-1 bg-white;
 }

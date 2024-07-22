@@ -14,13 +14,13 @@ export const SearchProduct = async (req, res) => {
     }
 
     // Search for products that match the query
-    // Performing a case-insensitive search on 'title', 'location', 'category', and 'condition' fields
+    // Performing a case-insensitive search on 'title', 'location', 'category', and 'description' fields
     const products = await Product.find({
       $or: [
         { title: { $regex: query, $options: "i" } },
         { location: { $regex: query, $options: "i" } },
         { category: { $regex: query, $options: "i" } },
-        { condition: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
       ],
     }).sort({ createdAt: -1 });
 

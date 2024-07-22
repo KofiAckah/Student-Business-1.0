@@ -8,6 +8,7 @@ import {
   faMessage,
   faCheck,
   faUser,
+  faClock,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Components
@@ -178,7 +179,10 @@ export default function ShowProduct() {
                   </p>
                   <p>{comment.comment}</p>
                   <p className="absolute text-sm text-gray-400 right-0">
-                    <span>{formatCreationTime(comment.createdAt)}</span>
+                    <span>
+                      <FontAwesomeIcon icon={faClock} className="mr-1" />
+                      {formatCreationTime(comment.createdAt)}
+                    </span>
                   </p>
                 </div>
               </div>

@@ -6,21 +6,23 @@ export const GetSeller = async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id).populate(
       "user",
-      "username email createdAt image phone bio"
+      "username email createdAt image phone bio id"
     );
-    const products = await Product.find({ user: req.user._id }).sort({
-      createdAt: -1,
-    });
     const formattedProduct = {
+      UserId: product.user._id,
       username: product.user.username,
       email: product.user.email,
       image: product.user.image,
       phone: product.user.phone,
       bio: product.user.bio,
       yearJoin: product.user.createdAt,
-      products,
     };
-    res.status(200).json(formattedProduct);
+    const UserId = formattedProduct.UserId;
+    const products = await Product.find({ user: UserId }).sort({
+      createdAt: -1,
+    });
+    const sellerInfo = { ...formattedProduct, products };
+    res.status(200).json(sellerInfo);
   } catch (error) {
     res
       .status(500)

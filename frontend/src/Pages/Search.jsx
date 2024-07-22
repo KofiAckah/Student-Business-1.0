@@ -344,16 +344,35 @@ export default function Search() {
             <Link
               key={index}
               to={`/product/${product._id}`}
-              className="border border-primary-400 rounded-lg text-primary-400 bg-white w-36 h-52 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg mx-auto my-3"
+              className="border border-primary-400 rounded-lg text-primary-400 bg-white w-36 h-52 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg mx-auto my-3 relative"
             >
               <img
                 src={`http://localhost:3005/uploads/${product.image}`}
                 alt="Product"
                 className="w-36 h-36 sm:w-48 sm:h-48 object-cover"
               />
-              <div className="p-2">
-                <h3 className="line-clamp-1 font-medium">{product.title}</h3>
-                <p className="text-red-400">
+              <p
+                className={
+                  "absolute top-0 bg-primary-400 text-white px-2 line-clamp-1"
+                }
+              >
+                {searchMode === "category" && product.category}
+                {searchMode === "location" && product.location}
+              </p>
+              <div className="py-2">
+                <h3
+                  className={`line-clamp-1 font-medium px-2 ${
+                    searchMode === "title" && "bg-primary-400 text-white"
+                  }`}
+                >
+                  {product.title}
+                </h3>
+                <p
+                  className={`text-red-400 px-2 ${
+                    searchMode === "price" &&
+                    "bg-primary-400 text-white font-medium"
+                  }`}
+                >
                   GH&#8373; {Number(product.price).toFixed(2)}
                 </p>
               </div>

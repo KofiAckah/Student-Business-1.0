@@ -46,6 +46,11 @@ export default function EditProfile() {
     fileReader.readAsDataURL(e.target.files[0]);
   };
 
+  const handleRemoveImage = () => {
+    setImage("");
+    setImagePreview(null);
+  };
+
   const handleEditProfile = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -90,17 +95,28 @@ export default function EditProfile() {
             />
           )}
         </div>
-        <label htmlFor="image" className="custom-file-upload mt-2">
-          Change Image
-        </label>
-        <input
-          style={{ display: "none" }}
-          className="loginInput"
-          type="file"
-          id="image"
-          onChange={handleImageChange}
-          accept="image/*"
-        />
+        <div>
+          <label
+            htmlFor="image"
+            className="border border-black inline-block cursor-pointer mt-2 mx-3 px-3 py-2"
+          >
+            {image === "" ? "Upload Image" : "Change Image"}
+          </label>
+          <input
+            style={{ display: "none" }}
+            className="loginInput"
+            type="file"
+            id="image"
+            onChange={handleImageChange}
+            accept="image/*"
+          />
+          <p
+            className="border border-black inline-block cursor-pointer mt-2 mx-3 px-3 py-2"
+            onClick={handleRemoveImage}
+          >
+            Remove Image
+          </p>
+        </div>
         <div className="my-2 sm:my-3 mt-5 sm:mt-7 w-10/12 md:w-2/3 xl:w-1/2">
           <label htmlFor="username">User Name</label>
           <input

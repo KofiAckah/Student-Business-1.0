@@ -17,6 +17,7 @@ import NavBar from "../Components/NavBar";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+  const [displayedProducts, setDisplayedProducts] = useState(20);
   const { enqueueSnackbar } = useSnackbar();
   // const navigate = useNavigate();
 
@@ -47,6 +48,10 @@ export default function Home() {
     { name: "Student Needs", icon: faBook, link: "/student-needs" },
     { name: "Clothes", icon: faShirt, link: "/clothes" },
   ];
+
+  const handleLoadMore = async () => {
+    setDisplayedProducts((prevDisplayedProducts) => prevDisplayedProducts + 4);
+  };
 
   return (
     <div className="bg-secondary-100">
@@ -86,7 +91,7 @@ export default function Home() {
         Latest Products
       </h2>
       <div className="flex flex-wrap sm:gap-2 my-4 lg:w-2/3 mx-5 lg:mx-auto">
-        {products.map((product, index) => (
+        {products.slice(0, displayedProducts).map((product, index) => (
           <Link
             key={index}
             to={`/product/${product.id}`}
@@ -105,6 +110,16 @@ export default function Home() {
             </div>
           </Link>
         ))}
+      </div>
+      <div className="flex">
+        {displayedProducts < products.length && (
+          <button
+            className="mx-auto bg-red-400 p-2 border border-red-400 text-white hover:text-red-400 hover:bg-white font-medium mb-2"
+            onClick={handleLoadMore}
+          >
+            Load More
+          </button>
+        )}
       </div>
       <div className="gradient h-10 w-full"></div>
     </div>
