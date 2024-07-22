@@ -67,7 +67,9 @@ export const UpdateProfile = async (req, res) => {
 
 export const SellerProducts = async (req, res) => {
   try {
-    const products = await Product.find({ user: req.user._id });
+    const products = await Product.find({ user: req.user._id }).sort({
+      createdAt: -1,
+    });
     res.status(200).json(products);
   } catch (error) {
     res

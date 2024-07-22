@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-
-import NavBar from "../../Components/NavBar";
 import { Link, useNavigate } from "react-router-dom";
+
+// Components
+import NavBar from "../../Components/NavBar";
+import NoProductImage from "../../assets/No data.gif";
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -109,6 +110,12 @@ export default function Profile() {
               My Products
             </p>
             <div className="flex flex-wrap gap-2 my-4 mx-5">
+              {products.length === 0 && (
+                <div>
+                  <p className="text-center">No Product yet</p>
+                  <img src={NoProductImage} alt="No Product" />
+                </div>
+              )}
               {products.map((product, index) => (
                 <div
                   key={index}
