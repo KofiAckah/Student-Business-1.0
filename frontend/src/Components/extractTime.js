@@ -89,3 +89,24 @@ function getDaySuffix(day) {
       return "th";
   }
 }
+
+export function formatCreationTime(creationDate) {
+  const now = new Date();
+  const createdDate = new Date(creationDate);
+  const diffInSeconds = Math.floor((now - createdDate) / 1000);
+  const minutes = Math.floor(diffInSeconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (diffInSeconds < 60) {
+    return "now";
+  } else if (minutes < 60) {
+    return `${minutes} minute(s) ago`;
+  } else if (hours < 24) {
+    return `${hours} hour(s) ago`;
+  } else if (days === 1) {
+    return "yesterday";
+  } else if (days > 1) {
+    return createdDate.toLocaleDateString();
+  }
+}

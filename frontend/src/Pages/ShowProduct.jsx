@@ -13,9 +13,12 @@ import {
 // Components
 import NavBar from "../Components/NavBar";
 import SendMessage from "../Components/SendMessage";
+import { formatCreationTime } from "../Components/extractTime";
 
 export default function ShowProduct() {
   const [product, setProduct] = useState({});
+  const [postComment, setPostComment] = useState([]);
+  const [comments, setComments] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const [showMessage, setShowMessage] = useState(false);
   const { id } = useParams();
@@ -35,6 +38,41 @@ export default function ShowProduct() {
     };
     fetchProduct();
   }, [enqueueSnackbar, id]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:3005/user/get-comments/${id}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setComments(res.data);
+      } catch (error) {
+        enqueueSnackbar(error.response.data.msg, { variant: "error" });
+      }
+    };
+    fetchComments();
+  }, [enqueueSnackbar, id]);
+
+  const handlePostComment = async () => {
+    if (postComment === "") {
+      enqueueSnackbar("Comment can't be empty", { variant: "error" });
+      return;
+    }
+    try {
+      const res = await axios.post(
+        `http://localhost:3005/user/create-comment/${id}`,
+        { comment: postComment },
+        { withCredentials: true }
+      );
+      enqueueSnackbar(res.data.msg, { variant: "success" });
+    } catch (error) {
+      enqueueSnackbar(error.response.data.msg, { variant: "error" });
+    }
+  };
+
   return (
     <div>
       <NavBar />
@@ -97,24 +135,73 @@ export default function ShowProduct() {
         </div>
       </div>
 
-      <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2 w-72 mx-auto">
-        <h1 className="font-semibold text-center text-lg">Safety tips</h1>
-        <p>
-          <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
-          Avoid paying in advance
-        </p>
-        <p>
-          <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
-          Meet with the seller at a safe public place
-        </p>
-        <p>
-          <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
-          Inspect the item and ensure it&apos;s exactly what you want
-        </p>
-        <p>
-          <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
-          Only pay if you&apos;re satisfied
-        </p>
+      <div className="md:grid grid-cols-3 items-center">
+        <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2 max-md:w-72 md:mx-4 mx-auto md:h-60 md:order-2">
+          <h1 className="font-semibold text-center text-lg">Safety tips</h1>
+          <p>
+            <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+            Avoid paying in advance
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+            Meet with the seller at a safe public place
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+            Inspect the item and ensure it&apos;s exactly what you want
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faCheck} className="mr-2 text-green-400" />
+            Only pay if you&apos;re satisfied
+          </p>
+        </div>
+        <div className="mt-2 sm:mt-4 w-10/12  mx-auto col-span-2 overflow-hidden">
+          <h1 className="font-semibold text-center text-lg">Comments</h1>
+          {comments.length === 0 ? (
+            <div>
+              <p className="text-center">No comments yet</p>
+              <p className="text-center">Be the first to comment</p>
+            </div>
+          ) : (
+            comments.map((comment) => (
+              <div key={comment._id} className="flex p-2 mt-2">
+                <div>
+                  <img
+                    src={`http://localhost:3005/uploads/${comment.userId.image}`}
+                    alt={`${comment.userId.username} Picture`}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                </div>
+                <div className="ml-4 w-10/12 relative">
+                  <p className="text-primary-400 font-bold w-full">
+                    {comment.userId.username}
+                  </p>
+                  <p>{comment.comment}</p>
+                  <p className="absolute text-sm text-gray-400 right-0">
+                    <span>{formatCreationTime(comment.createdAt)}</span>
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
+          <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2 flex items-center">
+            <textarea
+              className="loginInput h-20"
+              type="text"
+              id="description"
+              value={postComment}
+              onChange={(e) => setPostComment(e.target.value)}
+              placeholder="Add a comment"
+              style={{ resize: "none" }}
+            />
+            <button
+              onClick={handlePostComment}
+              className="mx-2 p-2 bg-red-400 text-white border-red-400 border hover:bg-white hover:text-red-400 rounded-lg"
+            >
+              Post
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

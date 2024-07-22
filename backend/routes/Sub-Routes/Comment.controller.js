@@ -8,18 +8,7 @@ export const createComment = async (req, res) => {
     const { id: productId } = req.params;
     const userId = req.user._id;
 
-    // const userIdChecker = req.user._id.toString().match(/([a-f\d]{24})/i)[0];
-
     const product = await Product.findById(productId);
-
-    // console.log("Reading Here: ", product.user);
-
-    // if (userIdChecker === product.user) {
-    if (userId === product.user) {
-      return res
-        .status(401)
-        .json({ msg: "You can't comment on your own product" });
-    }
 
     if (comment === "") {
       return res.status(401).json({ msg: "Fill the comment" });
@@ -30,16 +19,6 @@ export const createComment = async (req, res) => {
       productId,
       comment,
     });
-
-    // await product.save();
-
-    // if (newMessage) {
-    //   conversation.messages.push(newMessage);
-    //   // await conversation.save();
-    //   // await newMessage.save();
-    //   await Promise.all([conversation.save(), newMessage.save()]);
-    //   res.status(200).json(newMessage);
-    // }
 
     if (newComment) {
       product.comments.push(newComment);
@@ -58,10 +37,14 @@ export const createComment = async (req, res) => {
 export const getComments = async (req, res) => {
   try {
     const { id: productId } = req.params;
-    const product = await Product.findById(productId).populate({
-      path: "comments",
-      populate: { path: "userId" },
-    });
+    const product = await Product.findById(productId)
+      .sort({
+        createdAt: -1,
+      })
+      .populate({
+        path: "comments",
+        populate: { path: "userId" },
+      });
     res.status(200).json(product.comments);
     // res.status(200).json(product);
   } catch (error) {
