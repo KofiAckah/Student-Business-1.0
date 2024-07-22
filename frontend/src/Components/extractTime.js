@@ -102,6 +102,8 @@ export function formatCreationTime(creationDate) {
     return "now";
   } else if (minutes < 60) {
     return `${minutes} minute(s) ago`;
+  } else if (hours === 1) {
+    return `${hours} hour ago`;
   } else if (hours < 24) {
     return `${hours} hour(s) ago`;
   } else if (days === 1) {

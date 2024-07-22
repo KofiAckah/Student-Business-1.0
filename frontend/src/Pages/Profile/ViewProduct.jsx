@@ -7,9 +7,11 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 // Components
 import NavBar from "../../Components/NavBar";
+import { formatCreationTime } from "../../Components/extractTime";
 
 export default function ViewProduct() {
   const [product, setProduct] = useState("");
+  const [comments, setComments] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const { id } = useParams();
   useEffect(() => {
@@ -28,6 +30,23 @@ export default function ViewProduct() {
       }
     };
     fetchProduct();
+  }, [enqueueSnackbar, id]);
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:3005/user/get-comments/${id}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setComments(res.data);
+      } catch (error) {
+        enqueueSnackbar(error.response.data.msg, { variant: "error" });
+      }
+    };
+    fetchComments();
   }, [enqueueSnackbar, id]);
   return (
     <div>
@@ -85,6 +104,37 @@ export default function ViewProduct() {
             </p>
           </div>
         </div>
+      </div>
+      <div className="mb-10">
+        <h2
+          className={`text-center ${
+            comments.length === 0 ? "mt-2" : "my-2 font-medium"
+          }`}
+        >
+          {comments.length === 0
+            ? "No Comment for this product"
+            : "Comments Here"}
+        </h2>
+        {comments.map((comment) => (
+          <div key={comment._id} className="flex p-2 mt-2">
+            <div>
+              <img
+                src={`http://localhost:3005/uploads/${comment.userId.image}`}
+                alt={`${comment.userId.username} Picture`}
+                className="w-12 h-12 rounded-full object-cover"
+              />
+            </div>
+            <div className="ml-4 w-10/12 relative">
+              <p className="text-primary-400 font-bold w-full">
+                {comment.userId.username}
+              </p>
+              <p>{comment.comment}</p>
+              <p className="absolute text-sm text-gray-400 right-0">
+                <span>{formatCreationTime(comment.createdAt)}</span>
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
