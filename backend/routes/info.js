@@ -26,6 +26,7 @@ import {
   SearchByOnlyLocation,
   SearchByTitleAndCategory,
 } from "./Sub-Routes/Search.js";
+import { createComment, getComments } from "./Sub-Routes/Comment.controller.js";
 import { authMiddleware } from "../middleware/auth.js";
 
 const router = express.Router();
@@ -72,5 +73,7 @@ router.get("/search-by-location", SearchByOnlyLocation); // Done
 router.get("/search-by-category", SearchByOnlyCategory); // Not Using
 router.get("/search-by-price-range", SearchByPriceRange);
 router.get("/search-by-categoryandtitle", SearchByTitleAndCategory); // Done
+router.post("/create-comment/:id", authMiddleware, createComment);
+router.get("/get-comments/:id", getComments);
 
 export default router;

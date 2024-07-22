@@ -55,7 +55,7 @@ export default function Home() {
         <p className="text-white font-medium">
           Find anything in{" "}
           <span className="bg-black text-white px-2 py-1 rounded-md">
-            <FontAwesomeIcon icon={faLocationDot} /> All KNUST
+            <FontAwesomeIcon icon={faLocationDot} /> KNUST
           </span>
         </p>
         <div className="flex items-center mt-2">
