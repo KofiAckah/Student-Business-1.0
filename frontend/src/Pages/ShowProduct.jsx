@@ -103,7 +103,12 @@ export default function ShowProduct() {
             </p>
             <p>
               Category:{" "}
-              <Link className="text-red-400 font-bold">{product.category}</Link>
+              <Link
+                to={`/${product.category}`}
+                className="text-red-400 font-bold"
+              >
+                {product.category}
+              </Link>
             </p>
             <p className="text-primary-400 font-bold whitespace-pre-wrap">
               Description:
