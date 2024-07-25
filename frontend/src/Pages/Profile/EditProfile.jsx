@@ -98,7 +98,7 @@ export default function EditProfile() {
         <div>
           <label
             htmlFor="image"
-            className="border border-black inline-block cursor-pointer mt-2 mx-3 px-3 py-2"
+            className="border border-black inline-block cursor-pointer mt-2 mr-2 px-3 py-2"
           >
             {image === "" ? "Upload Image" : "Change Image"}
           </label>
@@ -111,7 +111,7 @@ export default function EditProfile() {
             accept="image/*"
           />
           <p
-            className="border border-black inline-block cursor-pointer mt-2 mx-3 px-3 py-2"
+            className="border border-black inline-block cursor-pointer mt-2 ml-2 px-3 py-2"
             onClick={handleRemoveImage}
           >
             Remove Image

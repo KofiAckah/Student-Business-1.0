@@ -5,7 +5,7 @@ import { useSnackbar } from "notistack";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
-  faMessage,
+  // faMessage,
   faUser,
   faPhone,
   faCalendar,
@@ -105,12 +105,12 @@ export default function ViewSeller() {
           </p>
         </div>
         <div className="md:w-1/3 p-2 rounded-lg">
-          <Link>
+          {/* <Link>
             <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
               <FontAwesomeIcon icon={faMessage} className="mr-3" /> Message the
               Seller
             </button>
-          </Link>
+          </Link> */}
           <Link to={`tel:0${seller.phone}`}>
             <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
               <FontAwesomeIcon icon={faPhone} className="mr-3" /> 0

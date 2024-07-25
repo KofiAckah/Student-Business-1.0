@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
 // Components
 import NavBar from "../../Components/NavBar";
@@ -116,7 +116,7 @@ export default function ViewProduct() {
             : "Comments Here"}
         </h2>
         {comments.map((comment) => (
-          <div key={comment._id} className="flex p-2 mt-2">
+          <div key={comment._id} className=" lg:w-1/2 mx-auto flex p-2 mt-2">
             <div>
               <img
                 src={`http://localhost:3005/uploads/${comment.userId.image}`}
@@ -126,15 +126,12 @@ export default function ViewProduct() {
             </div>
             <div className="ml-4 w-10/12 relative">
               <p className="text-primary-400 font-bold w-full">
-                {comment.userId.username}
-              </p>
-              <p>{comment.comment}</p>
-              <p className="absolute text-sm text-gray-400 right-0">
-                <span>
-                  <FontAwesomeIcon icon={faClock} className="mr-1" />
+                {comment.userId.username}{" "}
+                <span className="text-sm text-gray-400 font-normal">
                   {formatCreationTime(comment.createdAt)}
                 </span>
               </p>
+              <p>{comment.comment}</p>
             </div>
           </div>
         ))}

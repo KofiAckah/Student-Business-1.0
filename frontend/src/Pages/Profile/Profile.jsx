@@ -101,7 +101,7 @@ export default function Profile() {
               </p>
             </div>
             <p className="text-sm text-primary-400 my-1">Bio</p>
-            <p className="text-sm text-gray-500 my-1">
+            <p className="text-sm text-gray-500 my-1 whitespace-pre-line">
               {user.bio !== "" ? user.bio : ""}
             </p>
           </div>

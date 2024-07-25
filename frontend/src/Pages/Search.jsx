@@ -10,6 +10,7 @@ import {
   faArrowDownZA,
   faArrowDownShortWide,
   faArrowDownWideShort,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Components
@@ -25,8 +26,10 @@ export default function Search() {
   const [displayFilter, setDisplayFilter] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const [sortedProducts, setSortedProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleAllSearch = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(
         `http://localhost:3005/user/search-product?query=${query}`,
@@ -36,12 +39,15 @@ export default function Search() {
       );
       setProducts(res.data);
       setSortedProducts(res.data);
+      setLoading(false);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
+      setLoading(false);
     }
   };
 
   const handleSearchByTitle = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(
         `http://localhost:3005/user/search-by-title?query=${query}`,
@@ -51,12 +57,15 @@ export default function Search() {
       );
       setProducts(res.data);
       setSortedProducts(res.data);
+      setLoading(false);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
+      setLoading(false);
     }
   };
 
   const handleSearchByLocation = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(
         `http://localhost:3005/user/search-by-location?query=${query}`,
@@ -66,12 +75,15 @@ export default function Search() {
       );
       setProducts(res.data);
       setSortedProducts(res.data);
+      setLoading(false);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
+      setLoading(false);
     }
   };
 
   const handleSearchByCategory = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(
         `http://localhost:3005/user/search-by-categoryandtitle?category=${category}&title=${query}`,
@@ -81,8 +93,10 @@ export default function Search() {
       );
       setProducts(res.data);
       setSortedProducts(res.data);
+      setLoading(false);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
+      setLoading(false);
     }
   };
 
@@ -91,6 +105,7 @@ export default function Search() {
   };
 
   const handleSearchByPriceRange = async () => {
+    setLoading(true);
     try {
       const res = await axios.get(
         `http://localhost:3005/user/search-by-price-range?minPrice=${minPrice}&maxPrice=${maxPrice}`,
@@ -100,8 +115,10 @@ export default function Search() {
       );
       setProducts(res.data);
       setSortedProducts(res.data);
+      setLoading(false);
     } catch (error) {
       enqueueSnackbar(error.response.data.msg, { variant: "error" });
+      setLoading(false);
     }
   };
 
@@ -295,6 +312,11 @@ export default function Search() {
             </div>
           </div>
         </div>
+        {loading && (
+          <div className="flex items-center justify-center h-96">
+            <FontAwesomeIcon icon={faSpinner} size="3x" spin />
+          </div>
+        )}
         {products.length !== 0 && searchMode === "title" && (
           <p className="mt-4">Results of Only Product Name</p>
         )}

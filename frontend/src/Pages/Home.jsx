@@ -11,17 +11,21 @@ import {
   faUtensils,
   faBook,
   faShirt,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
 import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState(20);
   const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState(false);
   // const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
@@ -31,8 +35,10 @@ export default function Home() {
           }
         );
         setProducts(res.data);
+        setLoading(false);
       } catch (error) {
         enqueueSnackbar(error.response.data.msg, { variant: "error" });
+        setLoading(false);
       }
     };
     fetchProducts();
@@ -77,7 +83,7 @@ export default function Home() {
             <Link
               to={category.link}
               key={index}
-              className="border border-primary-400 rounded-lg p-5 text-primary-400 hover:bg-primary-400 hover:text-white transition duration-300 ease-in-out w-40 mx-auto"
+              className="border border-primary-400 rounded-lg p-5 text-primary-400 hover:bg-primary-400 hover:text-white transition duration-500 ease-in-out w-40 mx-auto"
             >
               <div className="flex flex-col items-center justify-center">
                 <FontAwesomeIcon icon={category.icon} size="3x" />
@@ -90,12 +96,17 @@ export default function Home() {
       <h2 className="text-center text-lg md:text-xl font-semibold">
         Latest Products
       </h2>
+      {loading && (
+        <div className="flex items-center justify-center h-96">
+          <FontAwesomeIcon icon={faSpinner} size="3x" spin />
+        </div>
+      )}
       <div className="flex flex-wrap sm:gap-2 my-4 lg:w-2/3 mx-5 lg:mx-auto">
         {products.slice(0, displayedProducts).map((product, index) => (
           <Link
             key={index}
             to={`/product/${product.id}`}
-            className="border border-primary-400 rounded-lg text-primary-400 bg-white w-36 h-52 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg mx-auto my-3"
+            className="border border-primary-400 rounded-lg text-primary-400 bg-white w-36 h-52 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg mx-auto my-3 transition-all ease-in-out duration-500"
           >
             <img
               src={`http://localhost:3005/uploads/${product.image}`}
@@ -121,7 +132,8 @@ export default function Home() {
           </button>
         )}
       </div>
-      <div className="gradient h-10 w-full"></div>
+      <Footer />
+      {/* <div className="gradient h-10 w-full"></div> */}
     </div>
   );
 }

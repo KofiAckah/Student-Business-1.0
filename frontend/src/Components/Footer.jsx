@@ -1,74 +1,81 @@
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebook,
+  faLinkedin,
+  faInstagram,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
-    <div className="gradient w-full h-full">
-      <div className="grid-cols-2">
-        <div>
-          <p>Categories</p>
+    <div className="gradient w-full h-full pb-4">
+      <div className="grid grid-cols-2">
+        <div className="mx-auto">
+          <p className="text-green-400 font-semibold">Categories</p>
           <ul>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/clothes">Clothes</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/electronics">Electronics</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/food">Food</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/home-appliances">Home Appliances</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/services">Services</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/software">Software</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/student-needs">Student Needs</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/others">Others</Link>
             </li>
           </ul>
         </div>
-        <div>
-          <p>Company</p>
+        <div className="mx-auto">
+          <p className="text-green-400 font-semibold">Company</p>
           <ul>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/about">About</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/contact">Contact</Link>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/terms-of-service">Terms of Service</Link>
-            </li>
+            </li> */}
           </ul>
-          <p>Social</p>
-          <ul>
-            <li>
+          <p className="text-green-400 font-semibold">Social</p>
+          <ul className="">
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <a href="https://www.facebook.com/">
-                <i className="fab fa-facebook"></i>
+                <FontAwesomeIcon icon={faFacebook} /> Facebook
               </a>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <a href="https://www.instagram.com/">
-                <i className="fab fa-instagram"></i>
+                <FontAwesomeIcon icon={faInstagram} /> Instagram
               </a>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <a href="https://www.twitter.com/">
-                <i className="fab fa-twitter"></i>
+                <FontAwesomeIcon icon={faXTwitter} /> Twitter
               </a>
             </li>
-            <li>
+            <li className="text-white hover:text-green-400 transition-all ease-in-out duration-500 hover:pl-2">
               <a href="https://www.linkedin.com/">
-                <i className="fab fa-linkedin"></i>
+                <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
               </a>
             </li>
           </ul>
