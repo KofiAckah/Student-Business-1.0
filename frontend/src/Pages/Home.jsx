@@ -19,7 +19,7 @@ import Footer from "../Components/Footer";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const [displayedProducts, setDisplayedProducts] = useState(20);
+  const [displayedProducts, setDisplayedProducts] = useState(4);
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
   // const navigate = useNavigate();

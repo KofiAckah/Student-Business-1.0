@@ -1,4 +1,4 @@
-// import { Navigate, Routes, Route } from "react-router-dom";
+// import { Navigate, Routes, Route, redirect } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Search from "./Pages/Search";
@@ -30,49 +30,37 @@ import Software from "./Pages/Categories/Software";
 import StudentNeeds from "./Pages/Categories/StudentNeeds";
 import Others from "./Pages/Categories/Others";
 
-// import { useAuthContext } from "./Components/authContext";
+import { useAuthContext } from "./Components/authContext";
 import "./App.css";
 
 export default function App() {
-  // const { auth } = useAuthContext();
+  const { auth } = useAuthContext();
+  console.log("Auth is: ", auth);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/search" element={<Search />} />
-      <Route path="/sell" element={<Sell />} />
-      {/* <Route
-        path="/sell"
-        element={
-          auth ? (
-            <Sell />
-          ) : (
-            // : <Login />} />
-            <Navigate to="/login" />
-          )
-        }
-      /> */}
+      {/* <Route path="/sell" element={<Sell />} /> */}
+      <Route path="/sell" element={auth ? <Sell /> : <Login />} />
       <Route path="/product/:id" element={<ShowProduct />} />
-      {/* <Route path="/product/:id" element={auth ? <ShowProduct /> : <Login />} /> */}
-      <Route path="/seller/:id" element={<ViewSeller />} />
+      <Route path="/seller/:id" element={auth ? <ViewSeller /> : <Login />} />
       {/* User Routes */}
-      <Route path="/profile" element={<Profile />} />
-      {/* <Route
-        path="/profile"
-        element={
-          auth ? (
-            <Profile />
-          ) : (
-            <Login />
-            // <Navigate to="/login" />
-          )
-        }
-      /> */}
-      <Route path="/edit-profile" element={<EditProfile />} />
-      <Route path="/view-items/:id" element={<ViewProduct />} />
-      <Route path="/edit-items/:id" element={<EditProduct />} />
+      <Route path="/profile" element={auth ? <Profile /> : <Login />} />
+      <Route
+        path="/edit-profile"
+        element={auth ? <EditProfile /> : <Login />}
+      />
+      <Route
+        path="/view-items/:id"
+        element={auth ? <ViewProduct /> : <Login />}
+      />
+      <Route
+        path="/edit-items/:id"
+        element={auth ? <EditProduct /> : <Login />}
+      />
       {/* Messages Routes */}
-      <Route path="/messages" element={<Message />} />
-      <Route path="/chat/:id" element={<Chat />} />
+      <Route path="/messages" element={auth ? <Message /> : <Login />} />
+      <Route path="/chat/:id" element={auth ? <Chat /> : <Login />} />
       {/* Categories Routes*/}
       <Route path="/clothes" element={<Clothes />} />
       <Route path="/food" element={<Food />} />

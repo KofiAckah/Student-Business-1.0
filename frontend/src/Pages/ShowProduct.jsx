@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSnackbar } from "notistack";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocationDot,
@@ -15,6 +15,7 @@ import {
 import NavBar from "../Components/NavBar";
 import SendMessage from "../Components/SendMessage";
 import { formatCreationTime } from "../Components/extractTime";
+import { useAuthContext } from "../Components/authContext";
 
 export default function ShowProduct() {
   const [product, setProduct] = useState({});
@@ -23,6 +24,9 @@ export default function ShowProduct() {
   const { enqueueSnackbar } = useSnackbar();
   const [showMessage, setShowMessage] = useState(false);
   const { id } = useParams();
+  const { auth } = useAuthContext();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -118,7 +122,11 @@ export default function ShowProduct() {
           <div>
             <button
               className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400"
-              onClick={() => setShowMessage(!showMessage)}
+              onClick={
+                auth
+                  ? () => setShowMessage((prev) => !prev)
+                  : () => navigate("/login")
+              }
             >
               <FontAwesomeIcon icon={faMessage} className="mr-3" />
               {showMessage ? "Hide Message Form" : "Send A Message"}
@@ -131,7 +139,7 @@ export default function ShowProduct() {
                 productImage={product.image}
               />
             )}
-            <Link to={`/seller/${product.id}`}>
+            <Link to={auth ? `/seller/${product.id}` : "/login"}>
               <button className="bg-red-400 text-white font-semibold py-2 px-4 rounded-lg mt-4 mx-auto w-full hover:bg-white border border-red-400 hover:text-red-400">
                 <FontAwesomeIcon icon={faUser} className="mr-3" /> View Seller
                 Profile
@@ -193,23 +201,25 @@ export default function ShowProduct() {
               </div>
             ))
           )}
-          <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2 flex items-center">
-            <textarea
-              className="loginInput h-20"
-              type="text"
-              id="description"
-              value={postComment}
-              onChange={(e) => setPostComment(e.target.value)}
-              placeholder="Add a comment"
-              style={{ resize: "none" }}
-            />
-            <button
-              onClick={handlePostComment}
-              className="mx-2 p-2 bg-red-400 text-white border-red-400 border hover:bg-white hover:text-red-400 rounded-lg"
-            >
-              Post
-            </button>
-          </div>
+          {auth && (
+            <div className="bg-secondary-100 p-2 rounded-lg self-stretch mt-4 mb-2 flex items-center">
+              <textarea
+                className="loginInput h-20"
+                type="text"
+                id="description"
+                value={postComment}
+                onChange={(e) => setPostComment(e.target.value)}
+                placeholder="Add a comment"
+                style={{ resize: "none" }}
+              />
+              <button
+                onClick={handlePostComment}
+                className="mx-2 p-2 bg-red-400 text-white border-red-400 border hover:bg-white hover:text-red-400 rounded-lg"
+              >
+                Post
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

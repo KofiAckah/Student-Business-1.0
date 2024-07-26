@@ -18,6 +18,7 @@ function Nav() {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const { auth } = useAuthContext();
   const { setAuth } = useAuthContext();
 
   const handleLogout = async () => {
@@ -124,7 +125,7 @@ function Nav() {
         </li>
         <li className="hover:bg-red-400 w-full hover:text-white">
           <Link onClick={handleLogout} className="p-2">
-            Logout
+            {auth ? "Logout" : "Login"}
           </Link>
         </li>
       </ul>

@@ -61,6 +61,6 @@ router.post(
   PostProduct
 );
 router.get("/get-product", GetProduct);
-router.get("/get-product/:id", authMiddleware, GetProductId);
+router.get("/get-product/:id", GetProductId);
 
 export default router;

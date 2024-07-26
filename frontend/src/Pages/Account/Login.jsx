@@ -30,7 +30,7 @@ export default function Login() {
       const data = res.data.token;
 
       localStorage.setItem("auth", data);
-      setAuth(data);
+      setAuth(localStorage);
 
       enqueueSnackbar(res.data.msg, { variant: "success" });
       navigate("/");
