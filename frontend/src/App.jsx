@@ -1,4 +1,5 @@
 // import { Navigate, Routes, Route, redirect } from "react-router-dom";
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Search from "./Pages/Search";
@@ -35,7 +36,15 @@ import "./App.css";
 
 export default function App() {
   const { auth } = useAuthContext();
-  console.log("Auth is: ", auth);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 3600000); // 1 hour in milliseconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
