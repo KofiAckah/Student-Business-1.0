@@ -180,11 +180,15 @@ export default function ShowProduct() {
             comments.map((comment) => (
               <div key={comment._id} className="flex p-2 mt-2">
                 <div>
-                  <img
-                    src={`http://localhost:3005/uploads/${comment.userId.image}`}
-                    alt={`${comment.userId.username} Picture`}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
+                  {comment.userId.image !== "" ? (
+                    <img
+                      src={`http://localhost:3005/uploads/${comment.userId.image}`}
+                      alt={`${comment.userId.username} Picture`}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                  ) : (
+                    <FontAwesomeIcon icon={faUser} className="text-4xl " />
+                  )}
                 </div>
                 <div className="ml-4 w-10/12 relative">
                   <p className="text-primary-400 font-bold w-full">
