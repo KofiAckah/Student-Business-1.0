@@ -29,7 +29,8 @@ export default function Home() {
     const fetchProducts = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3005/account/get-product",
+          "https://student-business-1-0-backend.vercel.app/account/get-product",
+          // "http://localhost:3005/account/get-product",
           {
             withCredentials: true,
           }
