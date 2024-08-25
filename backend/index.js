@@ -30,15 +30,22 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 // app.use(cors());
-app.use(
-  cors({
-    origin: "https://student-business-1-0.vercel.app/",
-    // origin: "http://localhost:5173",
-    // Adjust according to your frontend URL
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://student-business-1-0.vercel.app/",
+//     // origin: "http://localhost:5173",
+//     // Adjust according to your frontend URL
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//   })
+// );
+const corsOptions = {
+  origin: "https://student-business-1-0.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // If you need to send cookies or auth headers
+};
+app.use(cors(corsOptions));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
