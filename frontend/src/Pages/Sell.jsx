@@ -44,6 +44,7 @@ export default function Sell() {
     formData.append("negotiable", negotiable);
     try {
       const res = await axios.post(
+        "https://student-business-1-0-backend.vercel.app/account/post-product",
         "http://localhost:3005/account/post-product",
         formData,
         { withCredentials: true },

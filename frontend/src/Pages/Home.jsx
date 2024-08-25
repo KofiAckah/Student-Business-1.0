@@ -110,7 +110,7 @@ export default function Home() {
             className="border border-primary-400 rounded-lg text-primary-400 bg-white w-36 h-52 sm:w-48 sm:h-64 overflow-hidden hover:shadow-lg mx-auto my-3 transition-all ease-in-out duration-500"
           >
             <img
-              src={`http://localhost:3005/uploads/${product.image}`}
+              src={`https://student-business-1-0-backend.vercel.app/uploads/${product.image}`}
               alt="Product"
               className="w-36 h-36 sm:w-48 sm:h-48 object-cover"
             />

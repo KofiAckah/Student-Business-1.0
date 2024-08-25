@@ -32,7 +32,8 @@ export default function Search() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:3005/user/search-product?query=${query}`,
+        `https://student-business-1-0-backend.vercel.app/user/search-product?query=${query}`,
+        // `http://localhost:3005/user/search-product?query=${query}`,
         {
           withCredentials: true,
         }
@@ -50,7 +51,8 @@ export default function Search() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:3005/user/search-by-title?query=${query}`,
+        `https://student-business-1-0-backend.vercel.app/user/search-by-title?query=${query}`,
+        // `http://localhost:3005/user/search-by-title?query=${query}`,
         {
           withCredentials: true,
         }
@@ -68,7 +70,8 @@ export default function Search() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:3005/user/search-by-location?query=${query}`,
+        `https://student-business-1-0-backend.vercel.app/user/search-by-location?query=${query}`,
+        // `http://localhost:3005/user/search-by-location?query=${query}`,
         {
           withCredentials: true,
         }
@@ -86,7 +89,8 @@ export default function Search() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:3005/user/search-by-categoryandtitle?category=${category}&title=${query}`,
+        `https://student-business-1-0-backend.vercel.app/user/search-by-categoryandtitle?category=${category}&title=${query}`,
+        // `http://localhost:3005/user/search-by-categoryandtitle?category=${category}&title=${query}`,
         {
           withCredentials: true,
         }
@@ -108,7 +112,8 @@ export default function Search() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `http://localhost:3005/user/search-by-price-range?minPrice=${minPrice}&maxPrice=${maxPrice}`,
+        `https://student-business-1-0-backend.vercel.app/user/search-by-price-range?minPrice=${minPrice}&maxPrice=${maxPrice}`,
+        // `http://localhost:3005/user/search-by-price-range?minPrice=${minPrice}&maxPrice=${maxPrice}`,
         {
           withCredentials: true,
         }
