@@ -32,7 +32,7 @@ app.use(cookieParser());
 // app.use(cors());
 app.use(
   cors({
-    origin: "student-business-1-0.vercel.app",
+    origin: "https://student-business-1-0.vercel.app/",
     // origin: "http://localhost:5173",
     // Adjust according to your frontend URL
     credentials: true,
