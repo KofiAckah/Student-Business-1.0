@@ -18,7 +18,8 @@ export default function ResetPassword() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3005/account/reset-password",
+        "https://student-business-1-0-backend.vercel.app/account/reset-password",
+        // "http://localhost:3005/account/reset-password",
         {
           email,
           password,

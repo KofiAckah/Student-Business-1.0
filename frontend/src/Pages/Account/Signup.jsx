@@ -20,13 +20,17 @@ export default function SignUp() {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3005/account/register", {
-        username: userName,
-        email,
-        password,
-        confirmPassword,
-        phone,
-      });
+      const res = await axios.post(
+        "https://student-business-1-0-backend.vercel.app/account/register",
+        {
+          // const res = await axios.post("http://localhost:3005/account/register", {
+          username: userName,
+          email,
+          password,
+          confirmPassword,
+          phone,
+        }
+      );
       enqueueSnackbar(res.data.msg, { variant: "success" });
       enqueueSnackbar("Check email for verification", { variant: "info" });
       navigate("/login");
