@@ -36,6 +36,7 @@ app.use(
     // origin: "http://localhost:5173",
     // Adjust according to your frontend URL
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 app.use(
